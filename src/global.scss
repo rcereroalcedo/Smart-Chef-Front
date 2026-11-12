@@ -35,3 +35,21 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+/* ── Fuentes ── */
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/playfair-display/600.css';
+@import '@fontsource/playfair-display/700.css';
+
+/* ── Estilos generales de SmartChef ── */
+h1, h2, h3, ion-title {
+  font-family: var(--app-fuente-titulos), serif;
+  letter-spacing: -0.01em;
+}
+
+ion-toolbar {
+  --background: var(--ion-background-color);  /* barra del color del fondo */
+  --border-width: 0;                           /* sin línea debajo */
+}

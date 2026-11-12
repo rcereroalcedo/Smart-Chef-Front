@@ -1,2 +1,61 @@
-// For information on how to create your own theme, please refer to:
-// https://ionicframework.com/docs/theming/
+:root {
+  /* ── Tipografía ───────────────────────────── */
+  --ion-font-family: 'Inter', system-ui, sans-serif;               /* textos */
+  --app-fuente-titulos: 'Playfair Display', Georgia, serif;        /* títulos (variable nuestra) */
+
+  /* ── Fondo y texto ────────────────────────── */
+  --ion-background-color: #faf6f0;
+  --ion-background-color-rgb: 250, 246, 240;
+  --ion-text-color: #1e2a20;
+  --ion-text-color-rgb: 30, 42, 32;
+
+  /* ── Colores con nombre ───────────────────── */
+  --ion-color-primary: #d35400;
+  --ion-color-primary-rgb: 211, 84, 0;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #ba4a00;
+  --ion-color-primary-tint: #d7651a;
+
+  --ion-color-secondary: #1c3f24;
+  --ion-color-secondary-rgb: 28, 63, 36;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #193720;
+  --ion-color-secondary-tint: #33523a;
+
+  --ion-color-success: #2f9e6b;
+  --ion-color-success-rgb: 47, 158, 107;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #298b5e;
+  --ion-color-success-tint: #44a87a;
+
+  --ion-color-warning: #d98a1a;
+  --ion-color-warning-rgb: 217, 138, 26;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: #bf7917;
+  --ion-color-warning-tint: #dd9531;
+
+  --ion-color-danger: #d6534a;
+  --ion-color-danger-rgb: 214, 83, 74;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #bc4941;
+  --ion-color-danger-tint: #da635c;
+
+  --ion-color-medium: #6f7a70;
+  --ion-color-medium-rgb: 111, 122, 112;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #626c63;
+  --ion-color-medium-tint: #7d887e;
+
+  /* ── Variables propias de SmartChef ───────── */
+  --app-superficie: #ffffff;        /* fondo de tarjetas */
+  --app-chip-fondo: #e4ede1;        /* chips suaves (estimado de tu Figma) */
+  --app-borde: #e8e1d5;             /* líneas finas */
+  --app-radio: 16px;                /* redondeo de tarjetas */
+  --app-sombra: 0 1px 2px rgba(30, 42, 32, 0.05), 0 4px 14px rgba(30, 42, 32, 0.07);
+}
