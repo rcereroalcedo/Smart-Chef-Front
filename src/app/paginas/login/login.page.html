@@ -1,18 +1,47 @@
-<ion-content class="ion-padding">
-  <div class="centrado">
-    <ion-icon name="restaurant" class="logo"></ion-icon>
-    <h1>SmartChef</h1>
+<ion-content [fullscreen]="true" class="login">
+  <div class="pagina">
 
-    <ion-input label="Correo electrónico" labelPlacement="floating" type="email"></ion-input>
-    <ion-input label="Contraseña" labelPlacement="floating" type="password"></ion-input>
+    <!-- Zona 1: la marca -->
+    <div class="marca">
+      <div class="logo">
+        <img src="assets/fotos/logo.svg" alt="" />
+      </div>
+      <h1>
+        <span class="smart">Smart</span>
+        <span class="chef">Chef</span>
+      </h1>
+    </div>
 
-    <ion-button expand="block" routerLink="/app/inicio" routerDirection="root">
-      Acceder
-    </ion-button>
+    <!-- Zona 2: el formulario -->
+    <div class="formulario">
+      <ion-input
+        mode="md" fill="outline"
+        label="Correo electrónico" labelPlacement="stacked"
+        placeholder="Correo electrónico" type="email">
+        <ion-icon slot="start" name="mail-outline" aria-hidden="true"></ion-icon>
+      </ion-input>
 
-    <p class="separador">O continúa con</p>
-    <ion-button expand="block" fill="outline">Google</ion-button>
+      <ion-input
+        mode="md" fill="outline"
+        label="Contraseña" labelPlacement="stacked"
+        placeholder="Contraseña" type="password">
+        <ion-icon slot="start" name="lock-closed-outline" aria-hidden="true"></ion-icon>
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-input>
 
-    <p>¿No tienes cuenta? <a routerLink="/registro">Regístrate</a></p>
+      <ion-button expand="block" routerLink="/app/inicio" routerDirection="root">
+        Acceder
+      </ion-button>
+
+      <div class="separador"><span>O continúa con</span></div>
+
+      <ion-button expand="block" fill="outline" color="dark">
+        <ion-icon slot="start" name="logo-google"></ion-icon>
+        Google
+      </ion-button>
+
+      <p class="registro">¿No tienes cuenta? <a routerLink="/registro">Regístrate</a></p>
+    </div>
+
   </div>
 </ion-content>

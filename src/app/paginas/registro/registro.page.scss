@@ -1,0 +1,43 @@
+ion-back-button {
+  --color: var(--ion-text-color);
+}
+
+.pagina {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 8px 24px 32px;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.cabecera {
+  h1 { margin: 0; font-size: 30px; }
+  p  { margin: 6px 0 0; color: var(--ion-color-medium); }
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  ion-input {
+    --background: var(--app-superficie);
+    --border-radius: 12px;
+    --border-color: var(--app-borde);
+    --highlight-color-focused: var(--ion-color-primary);
+  }
+
+  ion-button { margin: 0; }
+}
+
+.acceso {
+  text-align: center;
+  color: var(--ion-color-medium);
+  margin: 4px 0 0;
+
+  a {
+    color: var(--ion-color-primary);
+    font-weight: 700;
+  }
+}

@@ -1,25 +1,59 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/login"></ion-back-button>
+      <ion-back-button defaultHref="/login" text=""></ion-back-button>
     </ion-buttons>
-    <ion-title>Crea tu cuenta</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <p>Mira recetas y guarda tu lista de la compra</p>
+<ion-content [fullscreen]="true">
+  <div class="pagina">
 
-  <ion-input label="Nombre" labelPlacement="floating"></ion-input>
-  <ion-input label="Correo electrónico" labelPlacement="floating" type="email"></ion-input>
-  <ion-input label="Contraseña" labelPlacement="floating" type="password"></ion-input>
-  <ion-input label="Repetir contraseña" labelPlacement="floating" type="password"></ion-input>
+    <div class="cabecera">
+      <h1>Crea tu cuenta</h1>
+      <p>Mira recetas y guarda tu lista de la compra</p>
+    </div>
 
-  <ion-button expand="block" routerLink="/app/inicio" routerDirection="root">
-    Crear cuenta
-  </ion-button>
+    <div class="formulario">
+      <ion-input
+        mode="md" fill="outline"
+        label="Nombre" labelPlacement="stacked"
+        placeholder="Nombre">
+        <ion-icon slot="start" name="person-outline" aria-hidden="true"></ion-icon>
+      </ion-input>
 
-  <p class="ion-text-center">
-    ¿Ya tienes cuenta? <a routerLink="/login" routerDirection="root">Inicia sesión</a>
-  </p>
+      <ion-input
+        mode="md" fill="outline"
+        label="Correo electrónico" labelPlacement="stacked"
+        placeholder="Correo electrónico" type="email">
+        <ion-icon slot="start" name="mail-outline" aria-hidden="true"></ion-icon>
+      </ion-input>
+
+      <ion-input
+        mode="md" fill="outline"
+        label="Contraseña" labelPlacement="stacked"
+        placeholder="Contraseña" type="password">
+        <ion-icon slot="start" name="lock-closed-outline" aria-hidden="true"></ion-icon>
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-input>
+
+      <ion-input
+        mode="md" fill="outline"
+        label="Repetir contraseña" labelPlacement="stacked"
+        placeholder="Repetir contraseña" type="password">
+        <ion-icon slot="start" name="lock-closed-outline" aria-hidden="true"></ion-icon>
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-input>
+
+      <ion-button expand="block" routerLink="/app/inicio" routerDirection="root">
+        Crear cuenta
+      </ion-button>
+
+      <p class="acceso">
+        ¿Ya tienes cuenta?
+        <a routerLink="/login" routerDirection="root">Inicia sesión</a>
+      </p>
+    </div>
+
+  </div>
 </ion-content>
