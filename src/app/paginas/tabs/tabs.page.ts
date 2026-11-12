@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular';
+import {IonIcon, IonLabel, IonTabBar, IonTabButton, IonTabs} from "@ionic/angular";
+
 
 @Component({
   selector: 'app-tabs',

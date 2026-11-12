@@ -5,6 +5,7 @@ describe('HistorialPage', () => {
   let component: HistorialPage;
   let fixture: ComponentFixture<HistorialPage>;
 
+
   beforeEach(() => {
     fixture = TestBed.createComponent(HistorialPage);
     component = fixture.componentInstance;
