@@ -2,20 +2,15 @@ import { Routes } from '@angular/router';
 
 const detalle = () =>
   import('./paginas/receta-detalle/receta-detalle.page').then(m => m.RecetaDetallePage);
+
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'login',     // ahora la app arranca en el login
-    pathMatch: 'full',
-  },
-  {
-    path: 'login',
-    loadComponent: () => import('./paginas/login/login.page').then(m => m.LoginPage),
-  },
-  {
-    path: 'registro',
-    loadComponent: () => import('./paginas/registro/registro.page').then(m => m.RegistroPage),
-  },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+
+  // Fuera del menú
+  { path: 'login', loadComponent: () => import('./paginas/login/login.page').then(m => m.LoginPage) },
+  { path: 'registro', loadComponent: () => import('./paginas/registro/registro.page').then(m => m.RegistroPage) },
+
+  // Dentro del menú
   {
     path: 'app',
     loadComponent: () => import('./paginas/tabs/tabs.page').then(m => m.TabsPage),
@@ -26,19 +21,15 @@ export const routes: Routes = [
       { path: 'buscar/:id', loadComponent: detalle },
       { path: 'favoritos', loadComponent: () => import('./paginas/favoritos/favoritos.page').then(m => m.FavoritosPage) },
       { path: 'favoritos/:id', loadComponent: detalle },
-      {
-        path: 'historial',
-        loadComponent: () => import('./paginas/historial/historial.page').then(m => m.HistorialPage),
-      },
-      {
-        path: 'perfil',
-        loadComponent: () => import('./paginas/perfil/perfil.page').then(m => m.PerfilPage),
-      },
-      {
-        path: '',
-        redirectTo: 'inicio',
-        pathMatch: 'full',
-      },
+      { path: 'historial', loadComponent: () => import('./paginas/historial/historial.page').then(m => m.HistorialPage) },
+      { path: 'perfil', loadComponent: () => import('./paginas/perfil/perfil.page').then(m => m.PerfilPage) },
+      { path: '', redirectTo: 'inicio', pathMatch: 'full' },
     ],
   },
+
+  // Pantalla completa, sin menú
+  { path: 'notificaciones', loadComponent: () => import('./paginas/notificaciones/notificaciones.page').then(m => m.NotificacionesPage) },
+
+  // Cualquier otra dirección: SIEMPRE LA ÚLTIMA
+  { path: '**', loadComponent: () => import('./paginas/no-encontrada/no-encontrada.page').then(m => m.NoEncontradaPage) },
 ];

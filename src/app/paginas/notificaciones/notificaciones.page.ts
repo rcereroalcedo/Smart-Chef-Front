@@ -1,19 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonBackButton } from '@ionic/angular';
 
 @Component({
   selector: 'app-notificaciones',
   templateUrl: './notificaciones.page.html',
   styleUrls: ['./notificaciones.page.scss'],
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonBackButton],
 })
-export class NotificacionesPage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class NotificacionesPage {}

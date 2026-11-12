@@ -1,13 +1,12 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>notificaciones</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Notificaciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">notificaciones</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <p>Aquí aparecerán tus avisos.</p>
 </ion-content>
