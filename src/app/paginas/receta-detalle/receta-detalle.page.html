@@ -1,13 +1,12 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>receta-detalle</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Receta</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">receta-detalle</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <p>Estás viendo la receta con <strong>id = {{ id() }}</strong></p>
 </ion-content>
