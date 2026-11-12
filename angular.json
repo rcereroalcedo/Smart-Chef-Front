@@ -73,6 +73,14 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "prebundle": {
+              "exclude": [
+                "@ionic/angular",
+                "@ionic/core"
+              ]
+            }
+          },
           "configurations": {
             "production": {
               "buildTarget": "app:build:production"

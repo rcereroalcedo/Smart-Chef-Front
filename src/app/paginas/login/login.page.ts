@@ -1,19 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import {IonButton, IonContent, IonHeader, IonIcon, IonInput, IonTitle, IonToolbar} from '@ionic/angular';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { IonContent, IonInput, IonButton, IonIcon, IonRouterLink } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonIcon, IonInput, IonButton]
+  imports: [IonContent, IonInput, IonButton, IonIcon, RouterLink, IonRouterLink],
 })
-export class LoginPage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class LoginPage {}
