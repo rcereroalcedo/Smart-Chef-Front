@@ -32,9 +32,9 @@
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+/* Antes: dark.system.css (se activa sola según el móvil) */
+/* Ahora: se activa cuando <html> tiene la clase "ion-palette-dark" */
+@import '@ionic/angular/css/palettes/dark.class.css';
 
 /* ── Fuentes ── */
 @import '@fontsource/inter/400.css';
