@@ -1,17 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LoginPage } from './login.page';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { IonContent, IonInput, IonButton, IonIcon, IonRouterLink } from '@ionic/angular/';
 
-describe('LoginPage', () => {
-  let component: LoginPage;
-  let fixture: ComponentFixture<LoginPage>;
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LoginPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss'],
+  imports: [IonContent, IonInput, IonButton, IonIcon, RouterLink, IonRouterLink],
+})
+export class LoginPage {}

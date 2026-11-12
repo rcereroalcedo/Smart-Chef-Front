@@ -1,0 +1,14 @@
+.centrado {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.logo {
+  font-size: 72px;
+  align-self: center;
+  color: var(--ion-color-primary);
+}
