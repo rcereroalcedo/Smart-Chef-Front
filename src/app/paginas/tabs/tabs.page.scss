@@ -1,0 +1,35 @@
+ion-tab-bar {
+  --background: var(--ion-background-color);   /* crema, como tu Figma */
+  --border: 1px solid var(--app-borde);        /* línea fina arriba */
+  --color: var(--ion-color-medium);            /* pestañas normales */
+  --color-selected: var(--ion-color-secondary);/* pestaña activa: verde oscuro */
+  height: 64px;
+  padding-top: 4px;
+}
+
+ion-tab-button {
+  --ripple-color: transparent;                 /* sin efecto de onda */
+
+  ion-icon {
+    font-size: 22px;
+    padding: 4px 18px;                         /* espacio para la píldora */
+    border-radius: 999px;                      /* bordes totalmente redondos */
+    transition: background-color 0.25s;
+  }
+
+  ion-label {
+    font-size: 11px;
+    font-weight: 500;
+    margin-top: 4px;
+  }
+}
+
+/* Ionic añade la clase .tab-selected al botón de la pestaña activa */
+ion-tab-button.tab-selected {
+  ion-icon {
+    background: rgba(var(--ion-color-secondary-rgb), 0.1);   /* píldora verde suave */
+  }
+  ion-label {
+    font-weight: 700;
+  }
+}

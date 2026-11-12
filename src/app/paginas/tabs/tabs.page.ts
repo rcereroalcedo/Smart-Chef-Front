@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import {IonIcon, IonLabel, IonTabBar, IonTabButton, IonTabs} from "@ionic/angular";
-
+import { Component, signal } from '@angular/core';
+import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular';
 
 @Component({
   selector: 'app-tabs',
@@ -8,4 +7,10 @@ import {IonIcon, IonLabel, IonTabBar, IonTabButton, IonTabs} from "@ionic/angula
   styleUrls: ['./tabs.page.scss'],
   imports: [IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel],
 })
-export class TabsPage {}
+export class TabsPage {
+  pestanaActiva = signal('inicio');
+
+  cambiarPestana(evento: { tab: string }) {
+    this.pestanaActiva.set(evento.tab);
+  }
+}

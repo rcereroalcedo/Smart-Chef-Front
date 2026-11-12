@@ -53,3 +53,34 @@ ion-toolbar {
   --background: var(--ion-background-color);  /* barra del color del fondo */
   --border-width: 0;                           /* sin línea debajo */
 }
+
+/* Botones: sin mayúsculas, redondeados y más altos */
+ion-button {
+  --border-radius: 12px;
+  text-transform: none;
+  font-weight: 700;
+  letter-spacing: 0;
+  min-height: 46px;
+}
+
+/* Tarjetas: blancas, redondeadas, sombra suave, sin margen de serie */
+ion-card {
+  --background: var(--app-superficie);
+  border-radius: var(--app-radio);
+  box-shadow: var(--app-sombra);
+  margin: 0;
+}
+
+/* Buscador: blanco con borde fino */
+ion-searchbar {
+  --background: var(--app-superficie);
+  --border-radius: 12px;
+  --box-shadow: 0 0 0 1px var(--app-borde);
+  --placeholder-color: var(--ion-color-medium);
+}
+
+/* Listas agrupadas con esquinas redondeadas */
+ion-list.list-inset {
+  border-radius: var(--app-radio);
+  box-shadow: 0 0 0 1px var(--app-borde);
+}
