@@ -1,21 +1,51 @@
 
-ion-back-button,
-ion-button.redondo {
-  --background: rgba(255, 255, 255, 0.92);
+/* Botón atrás: círculo blanco translúcido */
+ion-back-button {
+  --background: rgba(255, 255, 255, 0.88);
   --border-radius: 50%;
   --padding-start: 0;
   --padding-end: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-ion-back-button {
   --color: #1e2a20;
-  --icon-font-size: 20px;
+  --icon-font-size: 22px;
   --icon-margin-start: 0;
   --icon-margin-end: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Botón favorito: mismo círculo, con estado activo */
+.favorito {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  color: #1e2a20;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.15s, background-color 0.2s, color 0.2s;
+
+  &:active { transform: scale(0.9); }
+
+  &.activo {
+    background: #fff;
+    color: var(--ion-color-primary);
+    animation: latido 0.35s ease;
+  }
+}
+
+@keyframes latido {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.25); }
+  100% { transform: scale(1); }
 }
 
 /* Foto grande */

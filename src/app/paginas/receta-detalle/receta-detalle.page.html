@@ -5,10 +5,20 @@
     <div class="hero">
       <img [src]="r.foto" [alt]="r.titulo" />
       <div class="botones-foto">
-        <ion-back-button class="redondo" defaultHref="/app/inicio" text=""></ion-back-button>
-        <ion-button class="redondo" aria-label="Marcar como favorita" (click)="alternarFavorita()">
-          <ion-icon slot="icon-only" [name]="esFavorita() ? 'heart' : 'heart-outline'"></ion-icon>
-        </ion-button>
+        <ion-back-button defaultHref="/app/inicio" text=""></ion-back-button>
+        <button
+          type="button"
+          class="favorito"
+          [class.activo]="esFavorita()"
+          [attr.aria-pressed]="esFavorita()"
+          aria-label="Marcar como favorita"
+          (click)="alternarFavorita()">
+          @if (esFavorita()) {
+            <ion-icon name="heart"></ion-icon>
+          } @else {
+            <ion-icon name="heart-outline"></ion-icon>
+          }
+        </button>
       </div>
     </div>
 
