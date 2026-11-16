@@ -40,3 +40,8 @@ export interface Receta {
   ingredientes: IngredienteReceta[];
   pasos: Paso[];
 }
+export const TEXTO_DIFICULTAD: Record<Dificultad, string> = {
+  FACIL: 'Fácil',
+  MEDIA: 'Media',
+  DIFICIL: 'Difícil',
+};

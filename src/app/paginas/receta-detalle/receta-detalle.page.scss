@@ -1,0 +1,139 @@
+
+ion-back-button,
+ion-button.redondo {
+  --background: rgba(255, 255, 255, 0.92);
+  --border-radius: 50%;
+  --padding-start: 0;
+  --padding-end: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+ion-back-button {
+  --color: #1e2a20;
+  --icon-font-size: 20px;
+  --icon-margin-start: 0;
+  --icon-margin-end: 0;
+}
+
+/* Foto grande */
+.hero {
+  position: relative;        /* los botones se colocan respecto a la foto */
+  height: 300px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+/* Botones sobre la foto: atrás a la izquierda, favorito a la derecha */
+.botones-foto {
+  position: absolute;
+  top: calc(var(--ion-safe-area-top, 0px) + 12px);   /* respeta la barra de estado del móvil */
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+/* Hoja que se monta sobre la foto */
+.hoja {
+  position: relative;
+  margin-top: -28px;
+  border-radius: 28px 28px 0 0;
+  background: var(--ion-background-color);
+  padding: 24px 18px 32px;
+
+  h1 { margin: 0 0 6px; font-size: 24px; }
+}
+
+.valoracion {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--ion-color-primary);
+
+  span { margin-left: 4px; font-size: 13px; color: var(--ion-color-medium); }
+}
+
+/* Tres datos clave */
+.datos-clave {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 18px 0;
+
+  div {
+    background: var(--app-superficie);
+    border-radius: 14px;
+    padding: 10px 6px;
+    text-align: center;
+    box-shadow: 0 0 0 1px var(--app-borde);
+  }
+
+  .rotulo {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ion-color-medium);
+  }
+
+  strong { display: block; margin-top: 2px; font-size: 15px; }
+}
+
+/* Segmento con línea inferior */
+ion-segment {
+  --background: transparent;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--app-borde);
+}
+
+ion-segment-button {
+  --color: var(--ion-color-medium);
+  --color-checked: var(--ion-color-secondary);
+  --indicator-color: var(--ion-color-secondary);
+  --indicator-height: 3px;
+  text-transform: none;
+  font-weight: 600;
+}
+
+/* Filas de ingredientes y nutrición */
+.filas { margin-bottom: 16px; }
+
+.fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--app-borde);
+}
+
+ion-checkbox {
+  --size: 22px;
+  --border-radius: 6px;
+  --checkbox-background-checked: var(--ion-color-secondary);
+  --border-color-checked: var(--ion-color-secondary);
+  --checkmark-color: var(--ion-color-secondary-contrast);
+}
+
+/* Pasos numerados */
+.pasos {
+  margin: 0;
+  padding-left: 22px;
+
+  li {
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+
+  li::marker { font-weight: 700; color: var(--ion-color-secondary); }
+}
+
+.nota { margin: 0 0 4px; font-size: 13px; color: var(--ion-color-medium); }

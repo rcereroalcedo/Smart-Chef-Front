@@ -99,7 +99,7 @@ export const RECETAS: Receta[] = [
     nutricion: { calorias: 190, proteinas: 4, hidratos: 24, grasas: 9 },
     vegetariana: true, sinGluten: true, rapida: true, economica: true,
     valoracion: 4.7, favorita: false,
-    foto: FOTOS + 'crema-calabaza.jpg',
+    foto: FOTOS + 'crema-calabaza-jengibre.jpg',
     ingredientes: [
       { id: 18, nombre: 'Calabaza', cantidad: 800, unidad: 'GRAMOS' },
       { id: 19, nombre: 'Jengibre fresco', cantidad: 15, unidad: 'GRAMOS' },

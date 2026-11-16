@@ -1,12 +1,96 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/app/inicio"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Receta</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content class="ion-padding">
-  <p>Estás viendo la receta con <strong>id = {{ id() }}</strong></p>
+<ion-content [fullscreen]="true">
+  @if (receta(); as r) {
+
+    <div class="hero">
+      <img [src]="r.foto" [alt]="r.titulo" />
+      <div class="botones-foto">
+        <ion-back-button class="redondo" defaultHref="/app/inicio" text=""></ion-back-button>
+        <ion-button class="redondo" aria-label="Marcar como favorita" (click)="alternarFavorita()">
+          <ion-icon slot="icon-only" [name]="esFavorita() ? 'heart' : 'heart-outline'"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+
+    <div class="hoja">
+      <h1>{{ r.titulo }}</h1>
+
+      @if (r.valoracion) {
+        <div class="valoracion">
+          @for (estrella of estrellas(); track $index) {
+            <ion-icon [name]="estrella"></ion-icon>
+          }
+          <span>({{ r.valoracion }})</span>
+        </div>
+      }
+
+      <div class="datos-clave">
+        <div>
+          <span class="rotulo">Preparación</span>
+          <strong>{{ r.tiempoMin }} mins</strong>
+        </div>
+        <div>
+          <span class="rotulo">Porciones</span>
+          <strong>{{ r.raciones === 1 ? '1 persona' : r.raciones + ' personas' }}</strong>
+        </div>
+        <div>
+          <span class="rotulo">Dificultad</span>
+          <strong>{{ textosDificultad[r.dificultad] }}</strong>
+        </div>
+      </div>
+
+      <ion-segment mode="md" [value]="seccion()" (ionChange)="cambiarSeccion($event)">
+        <ion-segment-button value="ingredientes"><ion-label>Ingredientes</ion-label></ion-segment-button>
+        <ion-segment-button value="preparacion"><ion-label>Preparación</ion-label></ion-segment-button>
+        <ion-segment-button value="nutricion"><ion-label>Nutrición</ion-label></ion-segment-button>
+      </ion-segment>
+
+      @switch (seccion()) {
+
+        @case ('ingredientes') {
+          <div class="filas">
+            @for (i of r.ingredientes; track i.id) {
+              <div class="fila">
+                <ion-checkbox
+                  labelPlacement="end" justify="start"
+                  [checked]="estaMarcado(i.id)"
+                  (ionChange)="marcar(i.id, $event)">
+                  {{ cantidad(i) }} {{ i.nombre }}
+                </ion-checkbox>
+              </div>
+            }
+          </div>
+          <!-- Se conectará a la lista de la compra en un paso posterior -->
+          <ion-button expand="block" color="secondary">Generar lista de compras</ion-button>
+        }
+
+        @case ('preparacion') {
+          <ol class="pasos">
+            @for (p of r.pasos; track p.orden) {
+              <li>
+                @if (p.titulo) { <strong>{{ p.titulo }}:</strong> }
+                {{ p.texto }}
+              </li>
+            }
+          </ol>
+        }
+
+        @case ('nutricion') {
+          <p class="nota">Valores por ración</p>
+          <div class="filas">
+            <div class="fila"><span>Calorías</span><strong>{{ r.nutricion.calorias }} kcal</strong></div>
+            <div class="fila"><span>Proteínas</span><strong>{{ r.nutricion.proteinas }} g</strong></div>
+            <div class="fila"><span>Hidratos de carbono</span><strong>{{ r.nutricion.hidratos }} g</strong></div>
+            <div class="fila"><span>Grasas</span><strong>{{ r.nutricion.grasas }} g</strong></div>
+          </div>
+        }
+      }
+    </div>
+
+  } @else {
+    <app-estado-vacio
+      icono="restaurant-outline"
+      titulo="Receta no encontrada"
+      texto="Puede que la receta se haya retirado." />
+  }
 </ion-content>
