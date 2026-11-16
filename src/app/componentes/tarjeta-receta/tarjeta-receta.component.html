@@ -1,0 +1,21 @@
+<ion-card [routerLink]="[ruta(), receta().id]" [button]="true">
+  <div class="foto">
+    <img [src]="receta().foto" [alt]="receta().titulo" loading="lazy" />
+  </div>
+
+  <div class="cuerpo">
+    <h3>{{ receta().titulo }}</h3>
+
+    <div class="meta">
+      <span class="dato">
+        <ion-icon name="time-outline"></ion-icon> {{ receta().tiempoMin }} min
+      </span>
+      <span class="dato">
+        <ion-icon name="speedometer-outline"></ion-icon> {{ dificultadTexto() }}
+      </span>
+      @if (etiqueta(); as tipo) {
+        <app-chip-etiqueta [tipo]="tipo" />
+      }
+    </div>
+  </div>
+</ion-card>

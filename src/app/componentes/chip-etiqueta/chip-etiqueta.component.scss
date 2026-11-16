@@ -1,0 +1,9 @@
+.chip {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--app-chip-fondo);
+  color: var(--ion-color-secondary);
+}
