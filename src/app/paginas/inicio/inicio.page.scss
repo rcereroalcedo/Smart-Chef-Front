@@ -54,22 +54,6 @@ ion-searchbar { padding: 8px 16px; }
   scrollbar-width: none;
 }
 
-ion-chip.filtro {
-  --background: var(--app-superficie);
-  --color: var(--ion-text-color);
-  border: 1px solid var(--app-borde);
-  margin: 0;
-  font-weight: 700;
-  flex-shrink: 0;             /* que no se aplasten */
-  cursor: pointer;
-}
-
-ion-chip.filtro.activo {
-  --background: var(--ion-color-secondary);
-  --color: var(--ion-color-secondary-contrast);
-  border-color: transparent;
-}
-
 /* Título de sección */
 .titulo-seccion {
   display: flex;

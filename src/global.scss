@@ -84,3 +84,20 @@ ion-list.list-inset {
   border-radius: var(--app-radio);
   box-shadow: 0 0 0 1px var(--app-borde);
 }
+
+/* Píldoras de filtro (se usan en varias páginas) */
+ion-chip.filtro {
+  --background: var(--app-superficie);
+  --color: var(--ion-text-color);
+  border: 1px solid var(--app-borde);
+  margin: 0;
+  font-weight: 700;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+ion-chip.filtro.activo {
+  --background: var(--ion-color-secondary);
+  --color: var(--ion-color-secondary-contrast);
+  border-color: transparent;
+}

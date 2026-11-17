@@ -51,3 +51,11 @@ ion-card {
   font-size: 12px;
   color: var(--ion-color-medium);
 }
+/* Versión compacta (rejillas de dos columnas) */
+ion-card.compacta {
+  .foto { aspect-ratio: 4 / 3; }
+
+  .cuerpo { padding: 10px 12px 12px; }
+
+  .cuerpo h3 { font-size: 14px; }
+}

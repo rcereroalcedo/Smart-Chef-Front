@@ -1,0 +1,60 @@
+.cabecera {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: calc(var(--ion-safe-area-top, 0px) + 16px) 16px 8px;
+
+  h1 { margin: 0; font-size: 24px; }
+
+  .nueva {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ion-color-primary);
+    cursor: pointer;
+  }
+}
+
+.filtros {
+  display: flex;
+  gap: 8px;
+  padding: 8px 16px 14px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+/* Rejilla de dos columnas */
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 0 16px 24px;
+}
+
+.celda-completa { grid-column: 1 / -1; }      /* ocupa las dos columnas */
+
+/* Ventana de nueva colección */
+.cabecera-modal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h2 { margin: 0; }
+}
+
+.ayuda { margin: 0 0 16px; font-size: 14px; color: var(--ion-color-medium); }
+
+ion-input { margin-bottom: 8px; }
+
+.error {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--ion-color-danger);
+}
+
+ion-modal ion-button[expand='block'] { margin-top: 12px; }

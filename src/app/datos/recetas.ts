@@ -35,7 +35,7 @@ export const RECETAS: Receta[] = [
     tiempoMin: 25, raciones: 2, dificultad: 'FACIL', costeRacion: 1.9,
     nutricion: { calorias: 720, proteinas: 32, hidratos: 78, grasas: 29 },
     vegetariana: false, sinGluten: false, rapida: true, economica: true,
-    favorita: false,
+    favorita: true,
     foto: FOTOS + 'carbonara.jpg',
     ingredientes: [
       { id: 7, nombre: 'Espaguetis', cantidad: 200, unidad: 'GRAMOS' },
@@ -98,7 +98,7 @@ export const RECETAS: Receta[] = [
     tiempoMin: 25, raciones: 4, dificultad: 'MEDIA', costeRacion: 1.2,
     nutricion: { calorias: 190, proteinas: 4, hidratos: 24, grasas: 9 },
     vegetariana: true, sinGluten: true, rapida: true, economica: true,
-    valoracion: 4.7, favorita: false,
+    valoracion: 4.7, favorita: true,
     foto: FOTOS + 'crema-calabaza-jengibre.jpg',
     ingredientes: [
       { id: 18, nombre: 'Calabaza', cantidad: 800, unidad: 'GRAMOS' },
@@ -119,7 +119,7 @@ export const RECETAS: Receta[] = [
     tiempoMin: 30, raciones: 3, dificultad: 'FACIL', costeRacion: 1.1,
     nutricion: { calorias: 160, proteinas: 4, hidratos: 18, grasas: 8 },
     vegetariana: true, sinGluten: true, rapida: true, economica: true,
-    favorita: false,
+    favorita: true,
     foto: FOTOS + 'crema-calabacin.jpg',
     ingredientes: [
       { id: 20, nombre: 'Calabacín', cantidad: 600, unidad: 'GRAMOS' },
@@ -140,7 +140,7 @@ export const RECETAS: Receta[] = [
     tiempoMin: 20, raciones: 2, dificultad: 'FACIL', costeRacion: 2.4,
     nutricion: { calorias: 430, proteinas: 18, hidratos: 44, grasas: 20 },
     vegetariana: true, sinGluten: true, rapida: true, economica: true,
-    valoracion: 4.5, favorita: false,
+    valoracion: 4.5, favorita: true,
     foto: FOTOS + 'ensalada-lentejas.jpg',
     ingredientes: [
       { id: 22, nombre: 'Lentejas cocidas', cantidad: 300, unidad: 'GRAMOS' },
@@ -223,7 +223,7 @@ export const RECETAS: Receta[] = [
     tiempoMin: 35, raciones: 2, dificultad: 'MEDIA', costeRacion: 1.4,
     nutricion: { calorias: 450, proteinas: 9, hidratos: 78, grasas: 11 },
     vegetariana: true, sinGluten: true, rapida: false, economica: true,
-    favorita: false,
+    favorita: true,
     foto: FOTOS + 'cebolla-caramelizada.jpg',
     ingredientes: [
       { id: 4, nombre: 'Cebolla', cantidad: 3, unidad: 'UNIDADES' },

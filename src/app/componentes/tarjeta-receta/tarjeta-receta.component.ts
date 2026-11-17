@@ -12,7 +12,8 @@ import { ChipEtiquetaComponent, TipoEtiqueta } from '../chip-etiqueta/chip-etiqu
 })
 export class TarjetaRecetaComponent {
   receta = input.required<Receta>();    // la receta que tiene que pintar
-  ruta = input('/app/inicio');          // entrada opcional, con valor por defecto
+  ruta = input('/app/inicio');  // entrada opcional, con valor por defecto
+  compacta = input(false);     // por defecto, la tarjeta completa
 
   dificultadTexto = computed(() =>
     ({ FACIL: 'Fácil', MEDIA: 'Media', DIFICIL: 'Difícil' })[this.receta().dificultad]
