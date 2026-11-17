@@ -1,0 +1,60 @@
+:host { display: block; }
+
+ion-card { overflow: hidden; }
+
+.fila {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+}
+
+img {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.texto {
+  flex: 1;
+  min-width: 0;                 /* permite recortar el texto largo */
+
+  h3 { margin: 0 0 2px; font-size: 15px; font-weight: 700; color: var(--ion-text-color); }
+
+  p {
+    margin: 0;
+    font-size: 12px;
+    color: var(--ion-color-medium);
+  }
+
+  .tiempo { display: flex; align-items: center; gap: 4px; }
+
+  .estado { margin-top: 3px; font-weight: 600; }
+  .listo  { display: flex; align-items: center; gap: 4px; color: var(--ion-color-success); }
+  .falta  {
+    color: var(--ion-color-primary);
+    white-space: nowrap;        /* una sola línea, con puntos suspensivos */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.contador {
+  flex-shrink: 0;
+  text-align: center;
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  background: var(--app-chip-fondo);
+  color: var(--ion-color-secondary);
+
+  small { display: block; font-size: 10px; font-weight: 500; color: var(--ion-color-medium); }
+
+  &.completo {
+    background: rgba(var(--ion-color-success-rgb), 0.14);
+    color: var(--ion-color-success);
+  }
+}

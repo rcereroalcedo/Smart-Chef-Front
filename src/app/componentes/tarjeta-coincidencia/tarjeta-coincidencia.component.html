@@ -1,0 +1,25 @@
+<ion-card [routerLink]="[ruta(), coincidencia().receta.id]" [button]="true">
+  <div class="fila">
+    <img [src]="coincidencia().receta.foto" [alt]="coincidencia().receta.titulo" loading="lazy" />
+
+    <div class="texto">
+      <h3>{{ coincidencia().receta.titulo }}</h3>
+      <p class="tiempo">
+        <ion-icon name="time-outline"></ion-icon> {{ coincidencia().receta.tiempoMin }} min
+      </p>
+
+      @if (completa()) {
+        <p class="estado listo">
+          <ion-icon name="checkmark-circle"></ion-icon> Listo para cocinar
+        </p>
+      } @else {
+        <p class="estado falta">Te falta: {{ coincidencia().faltan.join(', ') }}</p>
+      }
+    </div>
+
+    <span class="contador" [class.completo]="completa()">
+      {{ coincidencia().tengo }}/{{ coincidencia().total }}
+      <small>ingredientes</small>
+    </span>
+  </div>
+</ion-card>
