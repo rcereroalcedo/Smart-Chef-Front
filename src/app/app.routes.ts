@@ -24,6 +24,7 @@ export const routes: Routes = [
       { path: 'historial', loadComponent: () => import('./paginas/historial/historial.page').then(m => m.HistorialPage) },
       { path: 'perfil', loadComponent: () => import('./paginas/perfil/perfil.page').then(m => m.PerfilPage) },
       { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+      { path: 'compra', loadComponent: () => import('./paginas/compra/compra.page').then(m => m.CompraPage) },
     ],
   },
 
@@ -32,4 +33,5 @@ export const routes: Routes = [
 
   // Cualquier otra dirección: SIEMPRE LA ÚLTIMA
   { path: '**', loadComponent: () => import('./paginas/no-encontrada/no-encontrada.page').then(m => m.NoEncontradaPage) },
+  { path: 'compra', loadComponent: () => import('./paginas/compra/compra.page').then(m => m.CompraPage) },
 ];

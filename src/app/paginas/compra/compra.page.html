@@ -1,13 +1,118 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>compra</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">compra</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <div class="cabecera">
+    <h1>Lista de compras</h1>
+    @if (lineas().length > 0) {
+      <span class="pendientes">
+        {{ pendientes() }} {{ pendientes() === 1 ? 'Pendiente' : 'Pendientes' }}
+      </span>
+    }
+  </div>
+
+  @for (g of grupos(); track g.nombre) {
+    <h2 class="seccion">{{ g.nombre }}</h2>
+
+    <ion-list [inset]="true">
+      @for (l of g.lineas; track l.id) {
+        <ion-item-sliding>
+          <ion-item>
+            <ion-checkbox
+              labelPlacement="end" justify="start"
+              [checked]="l.comprado"
+              (ionChange)="marcar(l.id, $event)">
+              <span [class.tachado]="l.comprado">{{ l.nombre }}</span>
+            </ion-checkbox>
+            <ion-note slot="end">{{ l.cantidad }} {{ l.unidad }}</ion-note>
+          </ion-item>
+
+          <ion-item-options side="end">
+            <ion-item-option color="danger" (click)="quitar(l.id)">Quitar</ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      }
+    </ion-list>
+  } @empty {
+    <app-estado-vacio
+      icono="cart-outline"
+      titulo="Tu lista está vacía"
+      texto="Genera una desde una receta o añade artículos con el botón +.">
+      <ion-button routerLink="/app/inicio">Ver recetas</ion-button>
+    </app-estado-vacio>
+  }
+
+  @if (lineas().length > 0) {
+    <div class="acciones">
+      <ion-button fill="outline" color="secondary" (click)="guardar()">Guardar</ion-button>
+      <ion-button fill="outline" color="medium" [disabled]="!hayComprados()" (click)="limpiarComprados()">
+        <ion-icon slot="start" name="trash-outline"></ion-icon>
+        Limpiar listos
+      </ion-button>
+    </div>
+  }
+
+  <!-- Botón flotante -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="modalAbierto.set(true)" aria-label="Añadir artículo">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- Ventana «Añadir artículo» -->
+  <ion-modal
+    [isOpen]="modalAbierto()"
+    (didDismiss)="modalAbierto.set(false)"
+    [initialBreakpoint]="0.6"
+    [breakpoints]="[0, 0.6, 0.9]">
+    <ng-template>
+      <ion-content class="ion-padding">
+        <div class="cabecera-modal">
+          <h2>Añadir artículo</h2>
+          <ion-button fill="clear" (click)="modalAbierto.set(false)">Cancelar</ion-button>
+        </div>
+
+        <div class="campos">
+          <ion-input
+            mode="md" fill="outline" label="Artículo" labelPlacement="floating"
+            placeholder="Por ejemplo, tomates"
+            [value]="nuevoNombre()" (ionInput)="cambiarNombre($event.detail.value)" />
+
+          <div class="dos-columnas">
+            <ion-input
+              mode="md" fill="outline" label="Cantidad" labelPlacement="floating" type="number"
+              [value]="nuevaCantidad()" (ionInput)="cambiarCantidad($event.detail.value)" />
+
+            <ion-select
+              mode="md" fill="outline" label="Unidad" labelPlacement="floating"
+              [value]="nuevaUnidad()" (ionChange)="cambiarUnidad($event.detail.value)">
+              <ion-select-option value="uds">uds</ion-select-option>
+              <ion-select-option value="g">g</ion-select-option>
+              <ion-select-option value="kg">kg</ion-select-option>
+              <ion-select-option value="ml">ml</ion-select-option>
+              <ion-select-option value="bot">bot</ion-select-option>
+            </ion-select>
+          </div>
+
+          <ion-select
+            mode="md" fill="outline" label="Sección" labelPlacement="floating"
+            [value]="nuevaSeccion()" (ionChange)="cambiarSeccion($event.detail.value)">
+            @for (s of secciones; track s) {
+              <ion-select-option [value]="s">{{ s }}</ion-select-option>
+            }
+          </ion-select>
+        </div>
+
+        <ion-button expand="block" [disabled]="nuevoNombre().trim() === ''" (click)="anadir()">
+          Añadir a la lista
+        </ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- Aviso al guardar -->
+  <ion-toast
+    [isOpen]="aviso()"
+    message="Lista guardada. Lo comprado pasará a tu despensa."
+    [duration]="2500" position="top" color="secondary"
+    (didDismiss)="aviso.set(false)" />
+
 </ion-content>

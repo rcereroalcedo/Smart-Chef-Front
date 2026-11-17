@@ -1,6 +1,7 @@
 import { Component, computed, input, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
-  IonHeader, IonToolbar, IonButtons, IonBackButton, IonButton, IonIcon, IonContent,
+  IonBackButton, IonButton, IonIcon, IonContent,
   IonSegment, IonSegmentButton, IonLabel, IonCheckbox,
   SegmentCustomEvent, CheckboxCustomEvent,
 } from '@ionic/angular';
@@ -15,7 +16,8 @@ type Seccion = 'ingredientes' | 'preparacion' | 'nutricion';
   templateUrl: './receta-detalle.page.html',
   styleUrls: ['./receta-detalle.page.scss'],
   imports: [
-    IonHeader, IonToolbar, IonButtons, IonBackButton, IonButton, IonIcon, IonContent,
+    RouterLink,
+    IonBackButton, IonButton, IonIcon, IonContent,
     IonSegment, IonSegmentButton, IonLabel, IonCheckbox, EstadoVacioComponent,
   ],
 })

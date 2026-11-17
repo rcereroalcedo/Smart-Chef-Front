@@ -1,20 +1,16 @@
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular';
+import { addIcons } from 'ionicons';
 import {
-  homeOutline, home, searchOutline, search, heartOutline, heart,
-  calendarOutline, calendar, personOutline, person,
-  notificationsOutline, timeOutline, cartOutline, moonOutline,
-  mailOutline, lockClosedOutline, logoGoogle, speedometerOutline,
-  checkmarkCircle, closeCircle, add
+  restaurant, restaurantOutline,
+  homeOutline, home, searchOutline, search,
+  heartOutline, heart, calendarOutline, calendar, personOutline, person,
+  notificationsOutline, mailOutline, lockClosedOutline, logoGoogle,
+  timeOutline, speedometerOutline,
+  star, starHalf, starOutline,
+  checkmarkCircle, closeCircle, add,
+  cartOutline, trashOutline, moonOutline,
 } from 'ionicons/icons';
-import {addIcons} from "ionicons";
-
-addIcons({ homeOutline, home, searchOutline, search, heartOutline, heart,
-  calendarOutline, calendar, personOutline, person,
-  notificationsOutline, timeOutline, cartOutline, moonOutline,
-  mailOutline, lockClosedOutline, logoGoogle, speedometerOutline,
-  checkmarkCircle, closeCircle, add});
-
 
 @Component({
   selector: 'app-root',
@@ -22,6 +18,16 @@ addIcons({ homeOutline, home, searchOutline, search, heartOutline, heart,
   imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent {
-  constructor() {}
-
+  constructor() {
+    addIcons({
+      restaurant, restaurantOutline,
+      homeOutline, home, searchOutline, search,
+      heartOutline, heart, calendarOutline, calendar, personOutline, person,
+      notificationsOutline, mailOutline, lockClosedOutline, logoGoogle,
+      timeOutline, speedometerOutline,
+      star, starHalf, starOutline,
+      checkmarkCircle, closeCircle, add,
+      cartOutline, trashOutline, moonOutline,
+    });
+  }
 }

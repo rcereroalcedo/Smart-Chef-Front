@@ -1,0 +1,82 @@
+.cabecera {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: calc(var(--ion-safe-area-top, 0px) + 16px) 16px 8px;
+
+  h1 { margin: 0; font-size: 24px; }
+
+  .pendientes {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ion-color-primary);
+  }
+}
+
+.seccion {
+  margin: 14px 16px 0;
+  font-size: 16px;
+}
+
+ion-list {
+  margin: 8px 16px 0;
+  border-radius: var(--app-radio);
+  box-shadow: 0 0 0 1px var(--app-borde);
+  background: var(--app-superficie);
+}
+
+ion-item {
+  --background: var(--app-superficie);
+  --border-color: var(--app-borde);
+}
+
+ion-checkbox {
+  flex: 1;
+  --size: 22px;
+  --border-radius: 6px;
+  --checkbox-background-checked: var(--ion-color-secondary);
+  --border-color-checked: var(--ion-color-secondary);
+  --checkmark-color: var(--ion-color-secondary-contrast);
+}
+
+.tachado {
+  text-decoration: line-through;
+  color: var(--ion-color-medium);
+}
+
+ion-note { font-weight: 600; }
+
+.acciones {
+  display: flex;
+  gap: 10px;
+  padding: 18px 16px 90px;       /* abajo, espacio para que el botón flotante no tape nada */
+
+  ion-button { flex: 1; margin: 0; }
+}
+
+ion-fab-button {
+  --border-radius: 16px;          /* cuadrado redondeado en vez de círculo */
+  --box-shadow: 0 6px 16px rgba(var(--ion-color-primary-rgb), 0.4);
+}
+
+/* Ventana de añadir */
+.cabecera-modal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h2 { margin: 0; }
+}
+
+.campos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 12px 0 18px;
+}
+
+.dos-columnas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
