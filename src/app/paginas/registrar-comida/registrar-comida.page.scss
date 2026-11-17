@@ -1,0 +1,20 @@
+.contenido { padding: 8px 16px 32px; }
+
+ion-input {
+  --border-radius: 12px;
+  --border-color: var(--app-borde);
+  margin-bottom: 14px;
+}
+
+.titulo-grupo {
+  margin: 18px 4px 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ion-color-medium);
+}
+
+ion-segment { --background: var(--app-chip-fondo); }
+
+ion-list { margin: 0 0 14px; }

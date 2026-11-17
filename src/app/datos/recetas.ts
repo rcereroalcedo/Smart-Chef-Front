@@ -162,7 +162,7 @@ export const RECETAS: Receta[] = [
     nutricion: { calorias: 210, proteinas: 9, hidratos: 33, grasas: 5 },
     vegetariana: true, sinGluten: false, rapida: true, economica: true,
     favorita: true,
-    foto: FOTOS + 'minestrone.jpg',
+    foto: FOTOS + 'sopa-minestrone.jpg',
     ingredientes: [
       { id: 13, nombre: 'Zanahoria', cantidad: 2, unidad: 'UNIDADES' },
       { id: 20, nombre: 'Calabacín', cantidad: 1, unidad: 'UNIDADES' },
@@ -224,7 +224,7 @@ export const RECETAS: Receta[] = [
     nutricion: { calorias: 450, proteinas: 9, hidratos: 78, grasas: 11 },
     vegetariana: true, sinGluten: true, rapida: false, economica: true,
     favorita: true,
-    foto: FOTOS + 'cebolla-caramelizada.jpg',
+    foto: FOTOS + 'arroz-cebolla.jpg',
     ingredientes: [
       { id: 4, nombre: 'Cebolla', cantidad: 3, unidad: 'UNIDADES' },
       { id: 2, nombre: 'Arroz blanco', cantidad: 150, unidad: 'GRAMOS' },

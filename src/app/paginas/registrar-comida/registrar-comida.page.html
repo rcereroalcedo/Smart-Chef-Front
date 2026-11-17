@@ -1,0 +1,83 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/historial"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registrar comida</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [strong]="true" routerLink="/app/historial" routerDirection="back">Guardar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="contenido">
+
+    <!-- Grupo 1: cuándo -->
+    <p class="titulo-grupo">Cuándo</p>
+
+    <ion-segment [value]="momentoElegido()" (ionChange)="cambiarMomento($event)">
+      @for (m of momentos; track m.valor) {
+        <ion-segment-button [value]="m.valor"><ion-label>{{ m.texto }}</ion-label></ion-segment-button>
+      }
+    </ion-segment>
+
+    <ion-list [inset]="true">
+      <ion-item>
+        <ion-label>Fecha</ion-label>
+        <ion-datetime-button datetime="fecha-comida" slot="end"></ion-datetime-button>
+      </ion-item>
+    </ion-list>
+
+    <!-- Grupo 2: qué has cocinado -->
+    <p class="titulo-grupo">Qué has cocinado</p>
+
+    <ion-list [inset]="true">
+      <ion-item>
+        <ion-select
+          label="Receta" interface="action-sheet" placeholder="Elige una receta"
+          (ionChange)="recetaElegida.set($event.detail.value)">
+          <ion-select-option value="LIBRE">Comida libre (sin receta)</ion-select-option>
+          @for (r of recetas; track r.id) {
+            <ion-select-option [value]="r.id">{{ r.titulo }}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    @if (esLibre()) {
+      <ion-input
+        mode="md" fill="outline" label="¿Qué has comido?" labelPlacement="floating"
+        placeholder="Ej.: Tostada con aguacate" [counter]="true" maxlength="60" />
+    }
+
+    <ion-input
+      mode="md" fill="outline" label="Raciones" labelPlacement="floating"
+      type="number" value="1" min="1" />
+
+    <!-- Grupo 3: despensa -->
+    <p class="titulo-grupo">Despensa</p>
+
+    <ion-list [inset]="true">
+      <ion-item>
+        <ion-toggle>Descontar los ingredientes de mi despensa</ion-toggle>
+      </ion-item>
+    </ion-list>
+
+    <ion-button expand="block" routerLink="/app/historial" routerDirection="back">
+      Registrar comida
+    </ion-button>
+
+  </div>
+
+  <!-- El calendario vive en una ventana que se abre al tocar la fecha -->
+  <ion-modal [keepContentsMounted]="true">
+    <ng-template>
+      <ion-datetime
+        id="fecha-comida" presentation="date" locale="es-ES"
+        [firstDayOfWeek]="1" [value]="hoy" [max]="hoy"
+        [showDefaultButtons]="true" doneText="Aceptar" cancelText="Cancelar">
+      </ion-datetime>
+    </ng-template>
+  </ion-modal>
+</ion-content>

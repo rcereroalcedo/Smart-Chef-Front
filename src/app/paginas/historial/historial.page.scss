@@ -1,0 +1,130 @@
+.cabecera {
+  padding: calc(var(--ion-safe-area-top, 0px) + 16px) 16px 8px;
+
+  h1 { margin: 0; font-size: 24px; }
+}
+
+/* Resumen semanal */
+.resumen {
+  margin: 8px 16px 16px;
+  padding: 16px;
+  background: var(--app-superficie);
+  border-radius: var(--app-radio);
+  box-shadow: 0 0 0 1px var(--app-borde);
+
+  h2 { margin: 0; font-size: 16px; }
+  .nota { margin: 2px 0 14px; font-size: 12px; color: var(--ion-color-medium); }
+}
+
+/* Selector de días */
+.dias {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  padding: 0 12px;
+}
+
+.dia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 0 6px;
+  border: none;
+  border-radius: 14px;
+  background: none;
+  color: var(--ion-text-color);
+  cursor: pointer;
+
+  .nombre { font-size: 11px; color: var(--ion-color-medium); }
+  strong { font-size: 16px; }
+
+  .punto {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: transparent;
+  }
+  .punto.visible { background: var(--ion-color-primary); }
+
+  &.futuro { opacity: 0.4; }
+
+  &.elegido {
+    background: var(--ion-color-secondary);
+    color: var(--ion-color-secondary-contrast);
+
+    .nombre { color: inherit; opacity: 0.8; }
+    .punto.visible { background: var(--ion-color-secondary-contrast); }
+  }
+}
+
+.titulo-dia { margin: 20px 16px 10px; font-size: 18px; }
+
+/* Comidas del día */
+.franjas {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0 16px 24px;
+}
+
+.momento {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ion-color-primary);
+}
+
+.comida {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--app-superficie);
+  border-radius: 14px;
+  box-shadow: 0 0 0 1px var(--app-borde);
+
+  img, .sin-foto {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .sin-foto {
+    display: grid;
+    place-items: center;
+    font-size: 24px;
+    color: var(--ion-color-medium);
+    background: var(--app-chip-fondo);
+  }
+
+  .datos {
+    display: flex;
+    flex-direction: column;
+
+    strong { font-size: 15px; }
+    span { font-size: 13px; color: var(--ion-color-medium); }
+  }
+
+  &.vacia {
+    justify-content: space-between;
+    color: var(--ion-color-medium);
+    font-size: 14px;
+  }
+}
+
+.mas {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  background: var(--ion-color-secondary);
+  color: var(--ion-color-secondary-contrast);
+}

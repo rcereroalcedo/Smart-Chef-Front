@@ -25,6 +25,7 @@ export const routes: Routes = [
       { path: 'perfil', loadComponent: () => import('./paginas/perfil/perfil.page').then(m => m.PerfilPage) },
       { path: '', redirectTo: 'inicio', pathMatch: 'full' },
       { path: 'compra', loadComponent: () => import('./paginas/compra/compra.page').then(m => m.CompraPage) },
+      { path: 'historial/registrar', loadComponent: () => import('./paginas/registrar-comida/registrar-comida.page').then(m => m.RegistrarComidaPage) },
     ],
   },
 
