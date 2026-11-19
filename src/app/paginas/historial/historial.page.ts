@@ -1,10 +1,10 @@
 import { Component, computed, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IonContent, IonIcon } from '@ionic/angular';
+import { IonContent, IonIcon, IonToast, IonAlert } from '@ionic/angular';
 import { RECETAS } from '../../datos/recetas';
 import { REGISTROS } from '../../datos/registros';
 import { Nutricion } from '../../modelos/receta';
-import { MOMENTOS, TEXTO_MOMENTO } from '../../modelos/registro-comida';
+import { MOMENTOS, TEXTO_MOMENTO, RegistroComida } from '../../modelos/registro-comida';
 import { BarraNutrienteComponent } from '../../componentes/barra-nutriente/barra-nutriente.component';
 import { EstadoVacioComponent } from '../../componentes/estado-vacio/estado-vacio.component';
 
@@ -16,7 +16,7 @@ const OBJETIVOS = { calorias: 2000, proteinas: 100, hidratos: 300 };   // valore
   selector: 'app-historial',
   templateUrl: './historial.page.html',
   styleUrls: ['./historial.page.scss'],
-  imports: [RouterLink, IonContent, IonIcon, BarraNutrienteComponent, EstadoVacioComponent],
+  imports: [RouterLink, IonContent, IonIcon, BarraNutrienteComponent, EstadoVacioComponent, IonToast, IonAlert],
 })
 export class HistorialPage {
   readonly hoyIndice = (new Date().getDay() + 6) % 7;     // lunes = 0 … domingo = 6
@@ -25,6 +25,35 @@ export class HistorialPage {
   registros = signal(REGISTROS);
   diaElegido = signal(this.hoyIndice);                     // empieza en hoy
   dias = this.crearDias();
+
+  avisoAbierto = signal(false);
+
+// La comida que el usuario ha pedido borrar y está pendiente de confirmar
+  pendienteBorrar = signal<{ id: number; titulo: string; texto: string } | null>(null);
+
+  mensajeBorrado = computed(() => {
+    const p = this.pendienteBorrar();
+    return p ? `Se eliminará «${p.titulo}» (${p.texto.toLowerCase()}) del ${this.nombreDia()}.` : '';
+  });
+
+  botonesConfirmar = [
+    { text: 'Cancelar', role: 'cancel' },
+    { text: 'Eliminar', role: 'destructive', handler: () => this.confirmarBorrado() },
+  ];
+
+  pedirBorrado(id: number, titulo: string, texto: string) {
+    this.pendienteBorrar.set({ id, titulo, texto });
+  }
+
+  confirmarBorrado() {
+    const pendiente = this.pendienteBorrar();
+    if (pendiente) this.eliminar(pendiente.id);
+  }
+
+  eliminar(id: number) {
+    this.registros.update(lista => lista.filter(r => r.id !== id));
+    this.avisoAbierto.set(true);
+  }
 
   nombreDia = computed(() => NOMBRES_LARGOS[this.diaElegido()]);
   diaFuturo = computed(() => this.diaElegido() > this.hoyIndice);
@@ -41,6 +70,7 @@ export class HistorialPage {
         texto: TEXTO_MOMENTO[momento],
         registro: r
           ? {
+            id: r.id,
             titulo: receta?.titulo ?? r.descripcion ?? 'Comida libre',
             foto: receta?.foto,
             calorias: r.nutricion.calorias,
@@ -78,4 +108,5 @@ export class HistorialPage {
       return { indice: i, nombre, numero: dia.getDate(), futuro: i > this.hoyIndice };
     });
   }
+
 }

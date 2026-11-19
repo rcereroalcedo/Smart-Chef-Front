@@ -56,6 +56,13 @@
                 <strong>{{ r.titulo }}</strong>
                 <span>{{ r.calorias }} kcal</span>
               </div>
+
+              <button
+                type="button" class="borrar"
+                [attr.aria-label]="'Eliminar ' + r.titulo + ' de ' + f.texto"
+                (click)="pedirBorrado(r.id, r.titulo, f.texto)">
+                <ion-icon name="trash-outline"></ion-icon>
+              </button>
             </div>
           } @else {
             <div class="comida vacia">
@@ -71,5 +78,17 @@
       }
     </div>
   }
+  <ion-alert
+    [isOpen]="pendienteBorrar() !== null"
+    header="Eliminar comida"
+    [message]="mensajeBorrado()"
+    [buttons]="botonesConfirmar"
+    (didDismiss)="pendienteBorrar.set(null)" />
 
+  <ion-toast
+    [isOpen]="avisoAbierto()"
+    message="Comida eliminada"
+    [duration]="2500"
+    position="top"
+    (didDismiss)="avisoAbierto.set(false)" />
 </ion-content>
