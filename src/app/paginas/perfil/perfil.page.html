@@ -1,22 +1,96 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>perfil</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <!-- Cabecera -->
+  <div class="cabecera-perfil">
+    <div class="avatar">{{ iniciales }}</div>
+    <h2>{{ nombre }}</h2>
+    <p>{{ email }}</p>
+  </div>
+
+  <!-- Preferencias dietéticas -->
+  <section class="bloque">
+    <h3>Preferencias dietéticas</h3>
+    <div class="rejilla-preferencias">
+      @for (p of preferencias(); track p.clave) {
+        <ion-toggle
+          justify="space-between"
+          [checked]="p.activa"
+          (ionChange)="cambiarPreferencia(p.clave, $event)">
+          {{ p.texto }}
+        </ion-toggle>
+      }
+    </div>
+  </section>
+
+  <!-- Ingredientes excluidos -->
+  <section class="bloque">
+    <h3>Ingredientes excluidos</h3>
+
+    <div class="chips">
+      @for (nombre of excluidos(); track nombre) {
+        <span class="excluido">
+          {{ nombre }}
+          <button type="button" (click)="quitar(nombre)" [attr.aria-label]="'Quitar ' + nombre">
+            <ion-icon name="close-circle"></ion-icon>
+          </button>
+        </span>
+      }
+      <button type="button" class="mas" (click)="panelAbierto.set(!panelAbierto())">
+        <ion-icon name="add"></ion-icon> Añadir más
+      </button>
+    </div>
+
+    @if (panelAbierto()) {
+      <div class="catalogo">
+        @for (a of disponibles(); track a) {
+          <button type="button" class="sugerencia" (click)="anadir(a)">{{ a }}</button>
+        }
+      </div>
+    }
+  </section>
+
+  <!-- Ajustes -->
   <ion-list [inset]="true">
     <ion-item>
       <ion-icon slot="start" name="moon-outline"></ion-icon>
-      <ion-toggle (ionChange)="cambiarTema($event)">Modo oscuro</ion-toggle>
+      <ion-toggle [checked]="modoOscuro()" (ionChange)="cambiarTema($event)">Modo oscuro</ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-icon slot="start" name="notifications-outline"></ion-icon>
+      <ion-toggle [checked]="true">Avisos de caducidad</ion-toggle>
+    </ion-item>
+    <ion-item [button]="true" [detail]="true" (click)="creditosAbiertos.set(true)">
+      <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+      <ion-label>Acerca de y créditos</ion-label>
     </ion-item>
   </ion-list>
+
+  <!-- Acciones -->
+  <div class="acciones">
+    <ion-button expand="block" color="secondary" routerLink="/app/compra">
+      <ion-icon slot="start" name="cart-outline"></ion-icon>
+      Ver lista de la compra
+    </ion-button>
+    <ion-button expand="block" color="danger" routerLink="/login" routerDirection="root">
+      Cerrar sesión
+    </ion-button>
+  </div>
+
+  <!-- Ventana «Acerca de y créditos» -->
+  <ion-modal
+    [isOpen]="creditosAbiertos()"
+    (didDismiss)="creditosAbiertos.set(false)"
+    [initialBreakpoint]="0.55"
+    [breakpoints]="[0, 0.55, 0.9]">
+    <ng-template>
+      <ion-content class="ion-padding">
+        <h2>Acerca de SmartChef</h2>
+        <p>Aplicación de recetas y alimentación saludable. Proyecto integrado de 2.º DAM.</p>
+        <h3>Créditos de las imágenes</h3>
+        <p>Rellena aquí el origen de tus fotos, igual que en el fichero CREDITOS.md del proyecto.</p>
+        <ion-button expand="block" fill="outline" (click)="creditosAbiertos.set(false)">Cerrar</ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
 </ion-content>
-<ion-button color="danger" expand="block" routerLink="/login" routerDirection="root">
-  Cerrar sesión
-</ion-button>

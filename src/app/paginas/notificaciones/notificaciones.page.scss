@@ -1,0 +1,46 @@
+.icono {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 19px;
+  margin-inline-end: 12px;
+}
+
+.icono.peligro {
+  color: var(--ion-color-danger);
+  background: rgba(var(--ion-color-danger-rgb), 0.12);
+}
+
+.icono.aviso {
+  color: var(--ion-color-warning-shade);
+  background: rgba(var(--ion-color-warning-rgb), 0.15);
+}
+
+.icono.info {
+  color: var(--ion-color-primary);
+  background: rgba(var(--ion-color-primary-rgb), 0.1);
+}
+
+.punto {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ion-color-primary);
+}
+
+.titulo-grupo {
+  margin: 18px 20px 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ion-color-medium);
+}
+
+ion-item { --background: var(--app-superficie); --border-color: var(--app-borde); }
+
+ion-list { border-radius: var(--app-radio); box-shadow: 0 0 0 1px var(--app-borde); }
+
+ion-segment { --background: var(--app-chip-fondo); }
