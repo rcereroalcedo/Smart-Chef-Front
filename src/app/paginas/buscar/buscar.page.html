@@ -2,7 +2,7 @@
 
   <div class="cabecera">
     <h1>¿Qué tienes en casa?</h1>
-    <p>Ingresa lo que tienes en el refrigerador y te diremos qué cocinar.</p>
+    <p>Ingresa lo que tienes en el frigorífico y te diremos qué cocinar.</p>
   </div>
 
   <!-- Ingredientes elegidos -->
@@ -15,14 +15,15 @@
       (anadir)="anadirPorNombre($event)" />
   </div>
 
-  <ion-button class="buscar" expand="block" (click)="buscar()">Buscar recetas</ion-button>
-
-  @if (pendiente()) {
-    <p class="aviso">Has cambiado los ingredientes: pulsa «Buscar recetas» para actualizar.</p>
-  }
+  <ion-button
+    class="buscar" expand="block"
+    [disabled]="resultados().length === 0"
+    (click)="titulo.scrollIntoView({ behavior: 'smooth' })">
+    {{ resultados().length === 1 ? 'Ver 1 receta' : 'Ver ' + resultados().length + ' recetas' }}
+  </ion-button>
 
   <!-- Resultados -->
-  <h2 class="subtitulo">Recetas que puedes preparar hoy</h2>
+  <h2 #titulo class="subtitulo">Recetas que puedes preparar hoy</h2>
 
   <div class="lista">
     @for (c of resultados(); track c.receta.id; let i = $index) {

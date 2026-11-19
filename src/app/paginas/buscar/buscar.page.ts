@@ -18,8 +18,6 @@ export class BuscarPage {
 
   // Pollo, arroz, limón, cebolla, ajo, salsa de soja y aceite de oliva
   seleccion = signal<number[]>([1, 2, 3, 4, 5, 6, 23]);
-  resultados = signal<Coincidencia[]>(this.calcular([1, 2, 3, 4, 5, 6, 23]));
-  pendiente = signal(false);          // ¿has cambiado ingredientes sin volver a buscar?
 
   nombresElegidos = computed(() =>
     this.catalogo.filter(i => this.seleccion().includes(i.id)).map(i => i.nombre)
@@ -27,6 +25,17 @@ export class BuscarPage {
   nombresDisponibles = computed(() =>
     this.catalogo.filter(i => !this.seleccion().includes(i.id)).map(i => i.nombre)
   );
+
+  // Se recalcula sola cada vez que cambia la selección
+  resultados = computed(() => this.calcular(this.seleccion()));
+
+  anadir(id: number) {
+    this.seleccion.update(lista => [...lista, id]);
+  }
+
+  quitar(id: number) {
+    this.seleccion.update(lista => lista.filter(x => x !== id));
+  }
 
   quitarPorNombre(nombre: string) {
     const ingrediente = this.catalogo.find(i => i.nombre === nombre);
@@ -36,22 +45,6 @@ export class BuscarPage {
   anadirPorNombre(nombre: string) {
     const ingrediente = this.catalogo.find(i => i.nombre === nombre);
     if (ingrediente) this.anadir(ingrediente.id);
-  }
-
-  anadir(id: number) {
-    this.seleccion.update(lista => [...lista, id]);
-    this.pendiente.set(true);
-  }
-
-  quitar(id: number) {
-    this.seleccion.update(lista => lista.filter(x => x !== id));
-    this.pendiente.set(true);
-  }
-
-
-  buscar() {
-    this.resultados.set(this.calcular(this.seleccion()));
-    this.pendiente.set(false);
   }
 
   // RN-04: solo recetas de las que tienes MÁS del 50 %, de mayor a menor porcentaje
