@@ -1,7 +1,6 @@
 <ion-content [fullscreen]="true">
 
   <!-- Saludo -->
-  <!-- Saludo -->
   <div class="cabecera">
     <a class="avatar" routerLink="/app/perfil" aria-label="Mi perfil">{{ iniciales }}</a>
 
@@ -12,7 +11,9 @@
 
     <ion-button class="campana" fill="clear" routerLink="/notificaciones" aria-label="Notificaciones">
       <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
-      <ion-badge color="danger">3</ion-badge>
+      @if (sinLeer > 0) {
+        <ion-badge color="danger">{{ sinLeer }}</ion-badge>
+      }
     </ion-button>
   </div>
 
@@ -27,6 +28,7 @@
   <div class="filtros">
     @for (f of filtros; track f.valor) {
       <ion-chip
+        tabindex="0" (keydown.enter)="alternar(f.valor)"
         class="filtro"
         [class.activo]="estaActivo(f.valor)"
         role="button"

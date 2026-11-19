@@ -7,6 +7,7 @@ import { RECETAS } from '../../datos/recetas';
 import { Receta } from '../../modelos/receta';
 import { TarjetaRecetaComponent } from '../../componentes/tarjeta-receta/tarjeta-receta.component';
 import { EstadoVacioComponent } from '../../componentes/estado-vacio/estado-vacio.component';
+import { NOTIFICACIONES } from '../../datos/notificaciones';
 
 type Filtro = 'ECONOMICO' | 'SIN_GLUTEN' | 'RAPIDO' | 'VEGETARIANO';
 
@@ -34,6 +35,8 @@ export class InicioPage {
     { valor: 'RAPIDO', texto: 'Rápido' },
     { valor: 'VEGETARIANO', texto: 'Vegetariano' },
   ];
+
+  sinLeer = NOTIFICACIONES.filter(n => !n.leida).length;
 
   // Lo que guarda la página: dos señales
   busqueda = signal('');

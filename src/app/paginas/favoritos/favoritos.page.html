@@ -11,7 +11,9 @@
   <div class="filtros">
     @for (c of colecciones(); track c.id) {
       <ion-chip
+        tabindex="0"
         class="filtro" role="button"
+        (keydown.enter)="activa.set(c.id)"
         [class.activo]="activa() === c.id"
         [attr.aria-pressed]="activa() === c.id"
         (click)="activa.set(c.id)">
@@ -54,7 +56,7 @@
 
         <ion-input
           mode="md" fill="outline" label="Nombre" labelPlacement="floating"
-          placeholder="Para el táper" maxlength="30" [counter]="true"
+          placeholder="Para el táper" [maxlength]="30" [counter]="true"
           [value]="nombreNuevo()" (ionInput)="cambiarNombre($event.detail.value)" />
 
         @if (nombreRepetido()) {

@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { IonCard, IonIcon } from '@ionic/angular';
 import { Receta } from '../../modelos/receta';
 import { ChipEtiquetaComponent, TipoEtiqueta } from '../chip-etiqueta/chip-etiqueta.component';
+import { TEXTO_DIFICULTAD } from '../../modelos/receta';
 
 @Component({
   selector: 'app-tarjeta-receta',
@@ -15,9 +16,7 @@ export class TarjetaRecetaComponent {
   ruta = input('/app/inicio');  // entrada opcional, con valor por defecto
   compacta = input(false);     // por defecto, la tarjeta completa
 
-  dificultadTexto = computed(() =>
-    ({ FACIL: 'Fácil', MEDIA: 'Media', DIFICIL: 'Difícil' })[this.receta().dificultad]
-  );
+  dificultadTexto = computed(() => TEXTO_DIFICULTAD[this.receta().dificultad]);
 
   // Solo se muestra una etiqueta, la más relevante
   etiqueta = computed<TipoEtiqueta | null>(() => {
