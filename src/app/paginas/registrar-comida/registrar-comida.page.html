@@ -35,7 +35,7 @@
     <ion-list [inset]="true">
       <ion-item>
         <ion-select
-          label="Receta" interface="action-sheet" placeholder="Elige una receta"
+          label="Receta" cancelText="Cancelar" interface="action-sheet" placeholder="Elige una receta"
           (ionChange)="recetaElegida.set($event.detail.value)">
           <ion-select-option value="LIBRE">Comida libre (sin receta)</ion-select-option>
           @for (r of recetas; track r.id) {

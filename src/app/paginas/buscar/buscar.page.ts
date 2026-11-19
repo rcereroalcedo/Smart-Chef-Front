@@ -1,16 +1,17 @@
 import { Component, computed, signal } from '@angular/core';
-import { IonContent, IonButton, IonIcon } from '@ionic/angular';
+import { IonContent, IonButton } from '@ionic/angular';
 import { RECETAS } from '../../datos/recetas';
 import { INGREDIENTES } from '../../datos/ingredientes';
 import { Coincidencia } from '../../modelos/coincidencia';
 import { TarjetaCoincidenciaComponent } from '../../componentes/tarjeta-coincidencia/tarjeta-coincidencia.component';
 import { EstadoVacioComponent } from '../../componentes/estado-vacio/estado-vacio.component';
+import { SelectorChipsComponent } from '../../componentes/selector-chips/selector-chips.component';
 
 @Component({
   selector: 'app-buscar',
   templateUrl: './buscar.page.html',
   styleUrls: ['./buscar.page.scss'],
-  imports: [IonContent, IonButton, IonIcon, TarjetaCoincidenciaComponent, EstadoVacioComponent],
+  imports: [IonContent, IonButton, TarjetaCoincidenciaComponent, EstadoVacioComponent, SelectorChipsComponent],
 })
 export class BuscarPage {
   catalogo = INGREDIENTES;
@@ -19,10 +20,23 @@ export class BuscarPage {
   seleccion = signal<number[]>([1, 2, 3, 4, 5, 6, 23]);
   resultados = signal<Coincidencia[]>(this.calcular([1, 2, 3, 4, 5, 6, 23]));
   pendiente = signal(false);          // ¿has cambiado ingredientes sin volver a buscar?
-  catalogoAbierto = signal(false);
 
-  elegidos = computed(() => this.catalogo.filter(i => this.seleccion().includes(i.id)));
-  disponibles = computed(() => this.catalogo.filter(i => !this.seleccion().includes(i.id)));
+  nombresElegidos = computed(() =>
+    this.catalogo.filter(i => this.seleccion().includes(i.id)).map(i => i.nombre)
+  );
+  nombresDisponibles = computed(() =>
+    this.catalogo.filter(i => !this.seleccion().includes(i.id)).map(i => i.nombre)
+  );
+
+  quitarPorNombre(nombre: string) {
+    const ingrediente = this.catalogo.find(i => i.nombre === nombre);
+    if (ingrediente) this.quitar(ingrediente.id);
+  }
+
+  anadirPorNombre(nombre: string) {
+    const ingrediente = this.catalogo.find(i => i.nombre === nombre);
+    if (ingrediente) this.anadir(ingrediente.id);
+  }
 
   anadir(id: number) {
     this.seleccion.update(lista => [...lista, id]);
@@ -34,14 +48,10 @@ export class BuscarPage {
     this.pendiente.set(true);
   }
 
-  alternarCatalogo() {
-    this.catalogoAbierto.update(abierto => !abierto);
-  }
 
   buscar() {
     this.resultados.set(this.calcular(this.seleccion()));
     this.pendiente.set(false);
-    this.catalogoAbierto.set(false);
   }
 
   // RN-04: solo recetas de las que tienes MÁS del 50 %, de mayor a menor porcentaje

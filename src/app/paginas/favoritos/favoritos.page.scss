@@ -1,4 +1,5 @@
 .cabecera {
+  color: var(--app-naranja-texto);
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -15,7 +16,7 @@
     background: none;
     font-size: 14px;
     font-weight: 700;
-    color: var(--ion-color-primary);
+    color: var(--app-naranja-texto);
     cursor: pointer;
   }
 }

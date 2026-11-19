@@ -26,27 +26,12 @@
   <section class="bloque">
     <h3>Ingredientes excluidos</h3>
 
-    <div class="chips">
-      @for (nombre of excluidos(); track nombre) {
-        <span class="excluido">
-          {{ nombre }}
-          <button type="button" (click)="quitar(nombre)" [attr.aria-label]="'Quitar ' + nombre">
-            <ion-icon name="close-circle"></ion-icon>
-          </button>
-        </span>
-      }
-      <button type="button" class="mas" (click)="panelAbierto.set(!panelAbierto())">
-        <ion-icon name="add"></ion-icon> Añadir más
-      </button>
-    </div>
-
-    @if (panelAbierto()) {
-      <div class="catalogo">
-        @for (a of disponibles(); track a) {
-          <button type="button" class="sugerencia" (click)="anadir(a)">{{ a }}</button>
-        }
-      </div>
-    }
+    <app-selector-chips
+      [elegidos]="excluidos()"
+      [disponibles]="disponibles()"
+      vacio="No excluyes ningún ingrediente."
+      (quitar)="quitar($event)"
+      (anadir)="anadir($event)" />
   </section>
 
   <!-- Ajustes -->

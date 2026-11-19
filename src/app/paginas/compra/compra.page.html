@@ -83,6 +83,7 @@
 
             <ion-select
               mode="md" fill="outline" label="Unidad" labelPlacement="floating"
+              cancelText="Cancelar" okText="Aceptar"
               [value]="nuevaUnidad()" (ionChange)="cambiarUnidad($event.detail.value)">
               <ion-select-option value="uds">uds</ion-select-option>
               <ion-select-option value="g">g</ion-select-option>
@@ -93,7 +94,7 @@
           </div>
 
           <ion-select
-            mode="md" fill="outline" label="Sección" labelPlacement="floating"
+            mode="md" fill="outline" cancelText="Cancelar" okText="Aceptar" label="Sección" labelPlacement="floating"
             [value]="nuevaSeccion()" (ionChange)="cambiarSeccion($event.detail.value)">
             @for (s of secciones; track s) {
               <ion-select-option [value]="s">{{ s }}</ion-select-option>

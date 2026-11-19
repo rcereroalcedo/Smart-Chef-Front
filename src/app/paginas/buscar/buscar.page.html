@@ -7,30 +7,12 @@
 
   <!-- Ingredientes elegidos -->
   <div class="caja">
-    <div class="chips">
-      @for (i of elegidos(); track i.id) {
-        <span class="ingrediente">
-          {{ i.nombre }}
-          <button type="button" (click)="quitar(i.id)" [attr.aria-label]="'Quitar ' + i.nombre">
-            <ion-icon name="close-circle"></ion-icon>
-          </button>
-        </span>
-      } @empty {
-        <span class="ayuda">Aún no has añadido nada.</span>
-      }
-
-      <button type="button" class="mas" (click)="alternarCatalogo()">
-        <ion-icon name="add"></ion-icon> Añadir más
-      </button>
-    </div>
-
-    @if (catalogoAbierto()) {
-      <div class="catalogo">
-        @for (i of disponibles(); track i.id) {
-          <button type="button" class="sugerencia" (click)="anadir(i.id)">{{ i.nombre }}</button>
-        }
-      </div>
-    }
+    <app-selector-chips
+      [elegidos]="nombresElegidos()"
+      [disponibles]="nombresDisponibles()"
+      vacio="Aún no has añadido nada."
+      (quitar)="quitarPorNombre($event)"
+      (anadir)="anadirPorNombre($event)" />
   </div>
 
   <ion-button class="buscar" expand="block" (click)="buscar()">Buscar recetas</ion-button>
@@ -43,14 +25,13 @@
   <h2 class="subtitulo">Recetas que puedes preparar hoy</h2>
 
   <div class="lista">
-    @for (c of resultados(); track c.receta.id) {
-      <app-tarjeta-coincidencia [coincidencia]="c" />
+    @for (c of resultados(); track c.receta.id; let i = $index) {
+      <app-tarjeta-coincidencia class="entrada" [style.--orden]="i" [coincidencia]="c" />
     } @empty {
       <app-estado-vacio
         icono="restaurant-outline"
         titulo="Nada que cocinar todavía"
         texto="Con lo que tienes no llegamos a la mitad de ninguna receta. Prueba a añadir más ingredientes.">
-        <ion-button fill="outline" (click)="catalogoAbierto.set(true)">Añadir ingredientes</ion-button>
       </app-estado-vacio>
     }
   </div>

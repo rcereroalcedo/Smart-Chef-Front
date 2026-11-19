@@ -49,8 +49,8 @@
 
   <!-- Resultados -->
   <div class="lista">
-    @for (receta of recetasVisibles(); track receta.id) {
-      <app-tarjeta-receta [receta]="receta" />
+    @for (receta of recetasVisibles(); track receta.id; let i = $index) {
+      <app-tarjeta-receta class="entrada" [style.--orden]="i" [receta]="receta" />
     } @empty {
       <app-estado-vacio
         icono="search-outline"

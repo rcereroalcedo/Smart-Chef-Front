@@ -1,0 +1,24 @@
+<div class="chips">
+  @for (nombre of elegidos(); track nombre) {
+    <span class="elegido">
+      {{ nombre }}
+      <button type="button" (click)="quitar.emit(nombre)" [attr.aria-label]="'Quitar ' + nombre">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </span>
+  } @empty {
+    <span class="ayuda">{{ vacio() }}</span>
+  }
+
+  <button type="button" class="mas" (click)="abierto.set(!abierto())">
+    <ion-icon name="add"></ion-icon> Añadir más
+  </button>
+</div>
+
+@if (abierto()) {
+  <div class="catalogo">
+    @for (nombre of disponibles(); track nombre) {
+      <button type="button" class="sugerencia" (click)="anadir.emit(nombre)">{{ nombre }}</button>
+    }
+  </div>
+}

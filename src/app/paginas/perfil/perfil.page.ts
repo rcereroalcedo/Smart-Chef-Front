@@ -1,9 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, computed  } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   IonContent, IonButton, IonIcon, IonList, IonItem, IonLabel, IonToggle, IonModal,
   IonRouterLink, ToggleCustomEvent,
 } from '@ionic/angular';
+import {SelectorChipsComponent} from "../../componentes/selector-chips/selector-chips.component";
 
 interface Preferencia {
   clave: string;
@@ -22,7 +23,7 @@ const ALERGENOS = [
   styleUrls: ['./perfil.page.scss'],
   imports: [
     RouterLink, IonContent, IonButton, IonIcon, IonList, IonItem, IonLabel,
-    IonToggle, IonModal, IonRouterLink,
+    IonToggle, IonModal, IonRouterLink, SelectorChipsComponent,
   ],
 })
 export class PerfilPage {
@@ -39,7 +40,6 @@ export class PerfilPage {
   ]);
 
   excluidos = signal<string[]>(['Cacahuete', 'Soja', 'Mariscos']);
-  panelAbierto = signal(false);
   creditosAbiertos = signal(false);
 
   // El interruptor empieza como esté la app: si ya estaba oscura, aparece encendido
@@ -59,9 +59,7 @@ export class PerfilPage {
     this.excluidos.update(lista => [...lista, nombre]);
   }
 
-  disponibles() {
-    return ALERGENOS.filter(a => !this.excluidos().includes(a));
-  }
+  disponibles = computed(() => ALERGENOS.filter(a => !this.excluidos().includes(a)));
 
   cambiarTema(evento: ToggleCustomEvent) {
     const activado = evento.detail.checked;

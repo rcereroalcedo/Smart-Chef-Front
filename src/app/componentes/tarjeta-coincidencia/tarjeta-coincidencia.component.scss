@@ -18,6 +18,7 @@ img {
 }
 
 .texto {
+  color: var(--app-naranja-texto);
   flex: 1;
   min-width: 0;                 /* permite recortar el texto largo */
 
@@ -34,7 +35,7 @@ img {
   .estado { margin-top: 3px; font-weight: 600; }
   .listo  { display: flex; align-items: center; gap: 4px; color: var(--ion-color-success); }
   .falta  {
-    color: var(--ion-color-primary);
+    color: var(--app-naranja-texto);
     white-space: nowrap;        /* una sola línea, con puntos suspensivos */
     overflow: hidden;
     text-overflow: ellipsis;

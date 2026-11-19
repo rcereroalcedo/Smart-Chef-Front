@@ -22,8 +22,9 @@
 
   <!-- Rejilla de recetas -->
   <div class="rejilla">
-    @for (r of recetasVisibles(); track r.id) {
-      <app-tarjeta-receta [receta]="r" ruta="/app/favoritos" [compacta]="true" />
+    @for (r of recetasVisibles(); track r.id; let i = $index) {
+      <app-tarjeta-receta class="entrada" [style.--orden]="i"
+                          [receta]="r" ruta="/app/favoritos" [compacta]="true" />
     } @empty {
       <div class="celda-completa">
         <app-estado-vacio
