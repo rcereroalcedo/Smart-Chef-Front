@@ -71,6 +71,7 @@ export class HistorialPage {
         registro: r
           ? {
             id: r.id,
+            recetaId: receta?.id,
             titulo: receta?.titulo ?? r.descripcion ?? 'Comida libre',
             foto: receta?.foto,
             calorias: r.nutricion.calorias,

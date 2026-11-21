@@ -47,15 +47,22 @@
 
           @if (f.registro; as r) {
             <div class="comida">
-              @if (r.foto) {
-                <img [src]="r.foto" alt="" />
-              } @else {
-                <div class="sin-foto"><ion-icon name="restaurant-outline"></ion-icon></div>
-              }
-              <div class="datos">
-                <strong>{{ r.titulo }}</strong>
-                <span>{{ r.calorias }} kcal</span>
-              </div>
+              <a class="contenido"
+                 [routerLink]="r.recetaId ? ['/app/historial', r.recetaId] : null"
+                 [attr.aria-label]="r.recetaId ? 'Ver la receta ' + r.titulo : null">
+                @if (r.foto) {
+                  <img [src]="r.foto" alt="" />
+                } @else {
+                  <div class="sin-foto"><ion-icon name="restaurant-outline"></ion-icon></div>
+                }
+                <div class="datos">
+                  <strong>{{ r.titulo }}</strong>
+                  <span>{{ r.calorias }} kcal</span>
+                </div>
+                @if (r.recetaId) {
+                  <ion-icon class="flecha" name="chevron-forward"></ion-icon>
+                }
+              </a>
 
               <button
                 type="button" class="borrar"

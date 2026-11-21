@@ -26,6 +26,9 @@ export const routes: Routes = [
       { path: '', redirectTo: 'inicio', pathMatch: 'full' },
       { path: 'compra', loadComponent: () => import('./paginas/compra/compra.page').then(m => m.CompraPage) },
       { path: 'historial/registrar', loadComponent: () => import('./paginas/registrar-comida/registrar-comida.page').then(m => m.RegistrarComidaPage) },
+      { path: 'historial', loadComponent: () => import('./paginas/historial/historial.page').then(m => m.HistorialPage) },
+      { path: 'historial/registrar', loadComponent: () => import('./paginas/registrar-comida/registrar-comida.page').then(m => m.RegistrarComidaPage) },
+      { path: 'historial/:id', loadComponent: detalle },
     ],
   },
 
