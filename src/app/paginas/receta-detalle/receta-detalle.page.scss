@@ -167,3 +167,49 @@ ion-checkbox {
 }
 
 .nota { margin: 0 0 4px; font-size: 13px; color: var(--ion-color-medium); }
+
+.guardar { margin: 10px 0 0; }
+
+/* Hoja de colecciones */
+.cabecera-modal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h2 { margin: 0; }
+}
+
+ion-modal ion-list {
+  margin: 12px 0 0;
+  border-radius: var(--app-radio);
+  box-shadow: 0 0 0 1px var(--app-borde);
+  background: var(--app-superficie);
+}
+
+ion-modal ion-item { --background: var(--app-superficie); --border-color: var(--app-borde); }
+
+ion-modal ion-checkbox {
+  flex: 1;
+  --size: 22px;
+  --border-radius: 6px;
+  --checkbox-background-checked: var(--ion-color-secondary);
+  --border-color-checked: var(--ion-color-secondary);
+  --checkmark-color: var(--ion-color-secondary-contrast);
+}
+
+.titulo-grupo {
+  margin: 20px 4px 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ion-color-medium);
+}
+
+ion-modal ion-input {
+  --border-radius: 12px;
+  --border-color: var(--app-borde);
+  --highlight-color-focused: var(--ion-color-primary);
+}
+
+.error { margin: 6px 4px 0; font-size: 12px; color: var(--ion-color-danger); }

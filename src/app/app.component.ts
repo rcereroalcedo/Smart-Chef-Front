@@ -10,7 +10,7 @@ import {
   star, starHalf, starOutline,
   checkmarkCircle, closeCircle, add,
   cartOutline, trashOutline, moonOutline,
-  alarmOutline, alertCircleOutline, informationCircleOutline
+  alarmOutline, alertCircleOutline, informationCircleOutline, albumsOutline
 } from 'ionicons/icons';
 
 @Component({
@@ -29,7 +29,7 @@ export class AppComponent {
       star, starHalf, starOutline,
       checkmarkCircle, closeCircle, add,
       cartOutline, trashOutline, moonOutline,
-      alarmOutline, alertCircleOutline, informationCircleOutline
+      alarmOutline, alertCircleOutline, informationCircleOutline, albumsOutline
     });
   }
 }

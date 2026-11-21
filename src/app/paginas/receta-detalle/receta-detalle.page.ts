@@ -3,9 +3,12 @@ import { RouterLink } from '@angular/router';
 import {
   IonBackButton, IonButton, IonIcon, IonContent,
   IonSegment, IonSegmentButton, IonLabel, IonCheckbox,
+  IonList, IonItem, IonNote, IonInput, IonModal, IonToast,
   SegmentCustomEvent, CheckboxCustomEvent,
 } from '@ionic/angular';
 import { RECETAS } from '../../datos/recetas';
+import { COLECCIONES } from '../../datos/colecciones';
+import { Coleccion } from '../../modelos/coleccion';
 import { IngredienteReceta, TEXTO_DIFICULTAD } from '../../modelos/receta';
 import { EstadoVacioComponent } from '../../componentes/estado-vacio/estado-vacio.component';
 
@@ -18,23 +21,47 @@ type Seccion = 'ingredientes' | 'preparacion' | 'nutricion';
   imports: [
     RouterLink,
     IonBackButton, IonButton, IonIcon, IonContent,
-    IonSegment, IonSegmentButton, IonLabel, IonCheckbox, EstadoVacioComponent,
+    IonSegment, IonSegmentButton, IonLabel, IonCheckbox,
+    IonList, IonItem, IonNote, IonInput, IonModal, IonToast,
+    EstadoVacioComponent,
   ],
 })
 export class RecetaDetallePage {
   id = input<string>();                       // viene de la dirección (:id)
   textosDificultad = TEXTO_DIFICULTAD;
 
-  seccion = signal<Seccion>('ingredientes');  // pestaña interna elegida
-  marcados = signal<number[]>([]);            // ingredientes con la casilla marcada
-  favoritaElegida = signal<boolean | null>(null);
+  seccion = signal<Seccion>('ingredientes');
+  marcados = signal<number[]>([]);
 
-  // Busca la receta cuyo id coincide con el de la dirección
-  receta = computed(() => RECETAS.find(r => r.id === Number(this.id())));
+  // ── Colecciones (maqueta: solo viven mientras la pantalla está abierta) ──
+  colecciones = signal<Coleccion[]>(COLECCIONES);
+  modalColecciones = signal(false);
+  nombreNuevo = signal('');
+  avisoColeccion = signal('');                // texto del aviso; vacío = cerrado
 
-  esFavorita = computed(() => this.favoritaElegida() ?? this.receta()?.favorita ?? false);
+  idReceta = computed(() => Number(this.id()));
+  receta = computed(() => RECETAS.find(r => r.id === this.idReceta()));
 
-  // Cinco iconos de estrella a partir de la valoración (4.9 → 5 llenas; 4.6 → 4 y media)
+  // El corazón está relleno si la receta está en la colección protegida (Favoritas)
+  esFavorita = computed(() =>
+    this.colecciones().some(c => c.protegida && c.recetaIds.includes(this.idReceta()))
+  );
+
+  numColecciones = computed(() =>
+    this.colecciones().filter(c => c.recetaIds.includes(this.idReceta())).length
+  );
+
+  textoBotonColecciones = computed(() => {
+    const n = this.numColecciones();
+    if (n === 0) return 'Guardar en una colección';
+    return n === 1 ? 'Guardada en 1 colección' : `Guardada en ${n} colecciones`;
+  });
+
+  nombreRepetido = computed(() =>
+    this.colecciones().some(c => c.nombre.toLowerCase() === this.nombreNuevo().trim().toLowerCase())
+  );
+  nombreValido = computed(() => this.nombreNuevo().trim().length > 0 && !this.nombreRepetido());
+
   estrellas = computed(() => {
     const v = this.receta()?.valoracion ?? 0;
     return [1, 2, 3, 4, 5].map(n =>
@@ -47,9 +74,62 @@ export class RecetaDetallePage {
   }
 
   alternarFavorita() {
-    this.favoritaElegida.set(!this.esFavorita());
+    const favoritas = this.colecciones().find(c => c.protegida);
+    if (favoritas) this.cambiarColeccion(favoritas, !this.esFavorita());
   }
 
+  // Marca o desmarca la receta en una colección, respetando las reglas de «Favoritas»
+  cambiarColeccion(coleccion: Coleccion, marcada: boolean) {
+    const receta = this.idReceta();
+
+    this.colecciones.update(lista =>
+      lista.map(c => {
+        const tiene = c.recetaIds.includes(receta);
+
+        if (c.id === coleccion.id) {
+          if (marcada && !tiene) return { ...c, recetaIds: [...c.recetaIds, receta] };
+          if (!marcada && tiene) return { ...c, recetaIds: c.recetaIds.filter(r => r !== receta) };
+          return c;
+        }
+        // Guardar en cualquier colección la añade también a «Favoritas»
+        if (marcada && c.protegida && !tiene && !coleccion.protegida) {
+          return { ...c, recetaIds: [...c.recetaIds, receta] };
+        }
+        // Quitarla de «Favoritas» la quita de todas
+        if (!marcada && coleccion.protegida && tiene) {
+          return { ...c, recetaIds: c.recetaIds.filter(r => r !== receta) };
+        }
+        return c;
+      })
+    );
+
+    this.avisoColeccion.set(marcada ? `Guardada en «${coleccion.nombre}»` : `Quitada de «${coleccion.nombre}»`);
+  }
+
+  cambiarNombre(valor: unknown) {
+    this.nombreNuevo.set(String(valor ?? ''));
+  }
+
+  // Crea una colección que ya contiene esta receta (RN-08: nombre único)
+  crearColeccion() {
+    if (!this.nombreValido()) return;
+
+    const nombre = this.nombreNuevo().trim();
+    const receta = this.idReceta();
+    const nuevoId = Math.max(0, ...this.colecciones().map(c => c.id)) + 1;
+
+    this.colecciones.update(lista => [
+      ...lista.map(c =>
+        c.protegida && !c.recetaIds.includes(receta) ? { ...c, recetaIds: [...c.recetaIds, receta] } : c
+      ),
+      { id: nuevoId, nombre, recetaIds: [receta], protegida: false },
+    ]);
+
+    this.nombreNuevo.set('');
+    this.avisoColeccion.set(`Guardada en «${nombre}»`);
+  }
+
+  // ── Ingredientes ──
   estaMarcado(id: number): boolean {
     return this.marcados().includes(id);
   }
@@ -60,7 +140,6 @@ export class RecetaDetallePage {
     );
   }
 
-  // 200 → "200 g", 0.5 unidades → "0,5"
   cantidad(i: IngredienteReceta): string {
     const n = String(i.cantidad).replace('.', ',');
     switch (i.unidad) {

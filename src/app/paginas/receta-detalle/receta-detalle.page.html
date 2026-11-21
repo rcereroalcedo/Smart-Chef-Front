@@ -34,6 +34,12 @@
         </div>
       }
 
+      <ion-button class="guardar" fill="outline" size="small" color="secondary"
+                  (click)="modalColecciones.set(true)">
+        <ion-icon slot="start" name="albums-outline"></ion-icon>
+        {{ textoBotonColecciones() }}
+      </ion-button>
+
       <div class="datos-clave">
         <div>
           <span class="rotulo">Preparación</span>
@@ -102,4 +108,58 @@
       titulo="Receta no encontrada"
       texto="Puede que la receta se haya retirado." />
   }
+
+  <ion-modal
+    [isOpen]="modalColecciones()"
+    (didDismiss)="modalColecciones.set(false)"
+    [initialBreakpoint]="0.6"
+    [breakpoints]="[0, 0.6, 0.9]">
+    <ng-template>
+      <ion-content class="ion-padding">
+        <div class="cabecera-modal">
+          <h2>Guardar en colección</h2>
+          <ion-button fill="clear" (click)="modalColecciones.set(false)">Listo</ion-button>
+        </div>
+
+        <ion-list [inset]="true">
+          @for (c of colecciones(); track c.id) {
+            <ion-item>
+              <ion-checkbox
+                labelPlacement="end" justify="start"
+                [checked]="c.recetaIds.includes(idReceta())"
+                (ionChange)="cambiarColeccion(c, $event.detail.checked)">
+                {{ c.nombre }}
+              </ion-checkbox>
+              <ion-note slot="end">{{ c.recetaIds.length }}</ion-note>
+            </ion-item>
+          }
+        </ion-list>
+
+        <p class="titulo-grupo">Nueva colección</p>
+        <ion-input
+          mode="md" fill="outline" label="Nombre" labelPlacement="floating"
+          placeholder="Para el táper" [maxlength]="30"
+          [value]="nombreNuevo()"
+          (ionInput)="cambiarNombre($event.detail.value)"
+          (keydown.enter)="crearColeccion()">
+          <ion-button slot="end" fill="clear" aria-label="Crear colección"
+                      [disabled]="!nombreValido()" (click)="crearColeccion()">
+            <ion-icon slot="icon-only" name="add"></ion-icon>
+          </ion-button>
+        </ion-input>
+
+        @if (nombreRepetido()) {
+          <p class="error">Ya tienes una colección con ese nombre.</p>
+        }
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-toast
+    [isOpen]="avisoColeccion() !== ''"
+    [message]="avisoColeccion()"
+    [duration]="2000"
+    position="top"
+    (didDismiss)="avisoColeccion.set('')" />
+
 </ion-content>
