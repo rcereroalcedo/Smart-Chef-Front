@@ -1,6 +1,6 @@
 import { Component, computed, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IonContent, IonChip, IonIcon, IonButton, IonModal, IonInput } from '@ionic/angular';
+import { IonContent, IonChip, IonIcon, IonButton, IonModal, IonInput, IonAlert, IonToast } from '@ionic/angular';
 import { RECETAS } from '../../datos/recetas';
 import { COLECCIONES } from '../../datos/colecciones';
 import { Coleccion } from '../../modelos/coleccion';
@@ -14,7 +14,7 @@ import { EstadoVacioComponent } from '../../componentes/estado-vacio/estado-vaci
   styleUrls: ['./favoritos.page.scss'],
   imports: [
     RouterLink, IonContent, IonChip, IonIcon, IonButton, IonModal, IonInput,
-    TarjetaRecetaComponent, EstadoVacioComponent,
+    TarjetaRecetaComponent, EstadoVacioComponent, IonAlert, IonToast
   ],
 })
 export class FavoritosPage {
@@ -23,6 +23,33 @@ export class FavoritosPage {
   activa = signal<number>(COLECCIONES.find(c => c.protegida)?.id ?? 0);
   modalAbierto = signal(false);
   nombreNuevo = signal('');
+  confirmarEliminar = signal(false);
+  avisoEliminada = signal(false);
+
+  coleccionActiva = computed(() => this.colecciones().find(c => c.id === this.activa()));
+
+  mensajeEliminar = computed(() => {
+    const c = this.coleccionActiva();
+    return c
+      ? `Se eliminará la colección «${c.nombre}». Las recetas no se borran: seguirán en Favoritas.`
+      : '';
+  });
+
+  botonesEliminar = [
+    { text: 'Cancelar', role: 'cancel' },
+    { text: 'Eliminar', role: 'destructive', handler: () => this.eliminarColeccion() },
+  ];
+
+  eliminarColeccion() {
+    const coleccion = this.coleccionActiva();
+    // «Favoritas» no se elimina nunca (RN-08), aunque alguien llegara a llamar a este método
+    if (!coleccion || coleccion.protegida) return;
+
+    const favoritas = this.colecciones().find(c => c.protegida);
+    this.colecciones.update(lista => lista.filter(c => c.id !== coleccion.id));
+    this.activa.set(favoritas?.id ?? 0);       // volvemos a «Favoritas»
+    this.avisoEliminada.set(true);
+  }
 
   recetasVisibles = computed(() => {
     const ids = this.colecciones().find(c => c.id === this.activa())?.recetaIds ?? [];

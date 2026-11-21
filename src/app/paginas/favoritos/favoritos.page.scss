@@ -59,3 +59,35 @@ ion-input { margin-bottom: 8px; }
 }
 
 ion-modal ion-button[expand='block'] { margin-top: 12px; }
+
+.resumen-coleccion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 16px 8px;
+  font-size: 13px;
+  color: var(--ion-color-medium);
+
+  .info strong { color: var(--ion-text-color); }
+}
+
+.fija {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.eliminar {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 44px;                 /* zona táctil mínima */
+  padding: 0 4px;
+  border: none;
+  background: none;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ion-color-danger);
+  cursor: pointer;
+}

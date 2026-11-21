@@ -22,6 +22,25 @@
     }
   </div>
 
+  @if (coleccionActiva(); as c) {
+    <div class="resumen-coleccion">
+    <span class="info">
+      <strong>{{ c.nombre }}</strong>
+      · {{ c.recetaIds.length }} {{ c.recetaIds.length === 1 ? 'receta' : 'recetas' }}
+    </span>
+
+      @if (c.protegida) {
+        <span class="fija">
+        <ion-icon name="lock-closed-outline"></ion-icon> No se puede eliminar
+      </span>
+      } @else {
+        <button type="button" class="eliminar" (click)="confirmarEliminar.set(true)">
+          <ion-icon name="trash-outline"></ion-icon> Eliminar colección
+        </button>
+      }
+    </div>
+  }
+
   <!-- Rejilla de recetas -->
   <div class="rejilla">
     @for (r of recetasVisibles(); track r.id; let i = $index) {
@@ -69,5 +88,19 @@
       </ion-content>
     </ng-template>
   </ion-modal>
+
+  <ion-alert
+    [isOpen]="confirmarEliminar()"
+    header="Eliminar colección"
+    [message]="mensajeEliminar()"
+    [buttons]="botonesEliminar"
+    (didDismiss)="confirmarEliminar.set(false)" />
+
+  <ion-toast
+    [isOpen]="avisoEliminada()"
+    message="Colección eliminada"
+    [duration]="2200"
+    position="top"
+    (didDismiss)="avisoEliminada.set(false)" />
 
 </ion-content>
