@@ -19,7 +19,7 @@
   border-radius: 50%;
   display: grid;
   place-items: center;
-  font-family: var(--app-fuente-titulos);
+  font-family: var(--app-fuente-titulos), serif;
   font-size: 34px;
   font-weight: 700;
   color: #fff;
@@ -65,4 +65,39 @@ ion-item ion-icon[slot='start'] {
   padding: 8px 16px 32px;
 
   ion-button { margin: 0; }
+}
+
+.editar { margin-top: 12px; }
+
+/* Ventana de edición */
+.cabecera-modal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h2 { margin: 0; }
+}
+
+.campos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 14px 0 20px;
+
+  ion-input {
+    --border-radius: 12px;
+    --border-color: var(--app-borde);
+    --highlight-color-focused: var(--ion-color-primary);
+  }
+}
+
+.fila-clave {
+  --background: transparent;
+  --padding-start: 0;
+}
+
+.error {
+  margin: -6px 4px 0;
+  font-size: 12px;
+  color: var(--ion-color-danger);
 }

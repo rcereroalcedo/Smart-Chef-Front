@@ -2,9 +2,13 @@
 
   <!-- Cabecera -->
   <div class="cabecera-perfil">
-    <div class="avatar">{{ iniciales }}</div>
-    <h2>{{ nombre }}</h2>
-    <p>{{ email }}</p>
+    <div class="avatar">{{ iniciales() }}</div>
+    <h2>{{ nombre() }}</h2>
+    <p>{{ email() }}</p>
+    <ion-button class="editar" fill="outline" size="small" color="secondary" (click)="abrirEdicion()">
+      <ion-icon slot="start" name="create-outline"></ion-icon>
+      Editar perfil
+    </ion-button>
   </div>
 
   <!-- Preferencias dietéticas -->
@@ -77,5 +81,85 @@
       </ion-content>
     </ng-template>
   </ion-modal>
+
+  <ion-modal
+    [isOpen]="editando()"
+    (didDismiss)="editando.set(false)"
+    [initialBreakpoint]="0.85"
+    [breakpoints]="[0, 0.85, 1]">
+    <ng-template>
+      <ion-content class="ion-padding">
+        <div class="cabecera-modal">
+          <h2>Editar perfil</h2>
+          <ion-button fill="clear" (click)="editando.set(false)">Cancelar</ion-button>
+        </div>
+
+        <div class="campos">
+          <ion-input
+            mode="md" fill="outline" label="Nombre" labelPlacement="floating"
+            autocomplete="name" [maxlength]="40"
+            [value]="borrador().nombre" (ionInput)="escribir('nombre', $event.detail.value)" />
+          @if (!nombreValido()) {
+            <p class="error">Escribe al menos 2 caracteres.</p>
+          }
+
+          <ion-input
+            mode="md" fill="outline" label="Correo electrónico" labelPlacement="floating"
+            type="email" inputmode="email" autocomplete="email"
+            [value]="borrador().email" (ionInput)="escribir('email', $event.detail.value)" />
+          @if (!emailValido()) {
+            <p class="error">Introduce un correo válido, como nombre&#64;correo.es.</p>
+          }
+
+          <ion-item lines="none" class="fila-clave">
+            <ion-toggle [checked]="cambiarClave()" (ionChange)="alternarClave($event)">
+              Cambiar contraseña
+            </ion-toggle>
+          </ion-item>
+
+          @if (cambiarClave()) {
+            <ion-input
+              mode="md" fill="outline" label="Contraseña actual" labelPlacement="floating"
+              type="password" autocomplete="current-password"
+              [value]="borrador().claveActual" (ionInput)="escribir('claveActual', $event.detail.value)">
+              <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+            </ion-input>
+
+            <ion-input
+              mode="md" fill="outline" label="Nueva contraseña" labelPlacement="floating"
+              type="password" autocomplete="new-password"
+              [value]="borrador().claveNueva" (ionInput)="escribir('claveNueva', $event.detail.value)">
+              <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+            </ion-input>
+            @if (borrador().claveNueva !== '' && !claveNuevaValida()) {
+              <p class="error">Mínimo 8 caracteres.</p>
+            }
+
+            <ion-input
+              mode="md" fill="outline" label="Repetir la nueva contraseña" labelPlacement="floating"
+              type="password" autocomplete="new-password"
+              [value]="borrador().claveRepetida" (ionInput)="escribir('claveRepetida', $event.detail.value)">
+              <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+            </ion-input>
+            @if (borrador().claveRepetida !== '' && !clavesCoinciden()) {
+              <p class="error">Las contraseñas no coinciden.</p>
+            }
+          }
+        </div>
+
+        <ion-button expand="block" [disabled]="!puedeGuardar()" (click)="guardarPerfil()">
+          Guardar cambios
+        </ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-toast
+    [isOpen]="perfilGuardado()"
+    message="Perfil actualizado"
+    [duration]="2200"
+    position="top"
+    color="secondary"
+    (didDismiss)="perfilGuardado.set(false)" />
 
 </ion-content>

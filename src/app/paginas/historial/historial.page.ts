@@ -4,7 +4,7 @@ import { IonContent, IonIcon, IonToast, IonAlert } from '@ionic/angular';
 import { RECETAS } from '../../datos/recetas';
 import { REGISTROS } from '../../datos/registros';
 import { Nutricion } from '../../modelos/receta';
-import { MOMENTOS, TEXTO_MOMENTO, RegistroComida } from '../../modelos/registro-comida';
+import { MOMENTOS, TEXTO_MOMENTO } from '../../modelos/registro-comida';
 import { BarraNutrienteComponent } from '../../componentes/barra-nutriente/barra-nutriente.component';
 import { EstadoVacioComponent } from '../../componentes/estado-vacio/estado-vacio.component';
 
